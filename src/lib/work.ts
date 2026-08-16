@@ -58,7 +58,7 @@ export const projects: Project[] = [
   },
   {
     slug: "atheory",
-    title: "Atheory Logo",
+    title: "Atheory Branding",
     client: "Atheory",
     discipline: "design",
     industry: "Music + Audio Tools",

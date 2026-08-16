@@ -26,15 +26,31 @@ export default function Gallery({
 }) {
   const shots = items.filter((i): i is { kind: "img" } & Img => i.kind === "img");
   const [open, setOpen] = useState<number | null>(null);
+  // Which src has finished decoding. The lightbox paints nothing until the
+  // requested image is ready, so it can never show the previous one.
+  const [ready, setReady] = useState<string | null>(null);
   const close = useCallback(() => setOpen(null), []);
+
+  const show = useCallback((i: number, src: string) => {
+    setReady(null);
+    setOpen(i);
+    const pre = new window.Image();
+    pre.onload = () => setReady(src);
+    pre.onerror = () => setReady(src);
+    pre.src = src;
+  }, []);
 
   useEffect(() => {
     if (open === null) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") close();
-      if (e.key === "ArrowRight") setOpen((i) => (i === null ? i : (i + 1) % shots.length));
-      if (e.key === "ArrowLeft")
-        setOpen((i) => (i === null ? i : (i - 1 + shots.length) % shots.length));
+      const step = (d: number) => {
+        if (open === null) return;
+        const n = (open + d + shots.length) % shots.length;
+        show(n, shots[n].src);
+      };
+      if (e.key === "ArrowRight") step(1);
+      if (e.key === "ArrowLeft") step(-1);
     };
     document.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
@@ -43,7 +59,7 @@ export default function Gallery({
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
     };
-  }, [open, close, shots.length]);
+  }, [open, close, shots, show]);
 
   const active = open === null ? null : shots[open];
 
@@ -98,7 +114,7 @@ export default function Gallery({
             <button
               key={item.src}
               type="button"
-              onClick={() => setOpen(i)}
+              onClick={() => show(i, item.src)}
               aria-label="Open image"
               className={`block w-full cursor-zoom-in ${wide ? "md:col-span-2" : ""}`}
             >
@@ -130,19 +146,21 @@ export default function Gallery({
           >
             ✕
           </button>
-          <Image
-            /* keyed so React mounts a fresh node: without it the browser keeps
-               painting the previously decoded image until the new one loads */
-            key={active.src}
-            src={active.src}
-            alt=""
-            width={active.w}
-            height={active.h}
-            sizes="100vw"
-            priority
-            onClick={(e) => e.stopPropagation()}
-            className="max-w-full max-h-full w-auto h-auto object-contain cursor-default"
-          />
+          {ready === active.src && (
+            /* eslint-disable-next-line @next/next/no-img-element --
+               the file is already decoded by the preloader above, so going
+               through the optimizer here would re-fetch and reintroduce the
+               window where a stale frame is on screen */
+            <img
+              key={active.src}
+              src={active.src}
+              alt=""
+              width={active.w}
+              height={active.h}
+              onClick={(e) => e.stopPropagation()}
+              className="max-w-full max-h-full w-auto h-auto object-contain cursor-default"
+            />
+          )}
         </div>
       )}
     </>

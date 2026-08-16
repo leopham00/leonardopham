@@ -318,11 +318,6 @@ export const images: Record<string, Entry> = {
         "h": 611
       },
       {
-        "src": "/work/breach/23.webp",
-        "w": 558,
-        "h": 614
-      },
-      {
         "src": "/work/breach/24.webp",
         "w": 2200,
         "h": 412
@@ -950,11 +945,6 @@ export const images: Record<string, Entry> = {
         "h": 2035
       },
       {
-        "src": "/work/pitchfork/02.webp",
-        "w": 430,
-        "h": 193
-      },
-      {
         "src": "/work/pitchfork/03.webp",
         "w": 1200,
         "h": 455
@@ -963,16 +953,6 @@ export const images: Record<string, Entry> = {
         "src": "/work/pitchfork/04.webp",
         "w": 1019,
         "h": 2518
-      },
-      {
-        "src": "/work/pitchfork/05.webp",
-        "w": 772,
-        "h": 1000
-      },
-      {
-        "src": "/work/pitchfork/06.webp",
-        "w": 273,
-        "h": 175
       },
       {
         "src": "/work/pitchfork/07.webp",

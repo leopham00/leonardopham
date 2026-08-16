@@ -86,24 +86,54 @@ export default async function ProjectPage({
   const clips = videos(project);
   const shots = gallery(project);
   const layout = layoutFor(project.assets);
+  // Vertical work keeps a vertical tile; the hero shares the video's shape.
+  const h = hero(project);
+  const vertical = !!h && h.w / h.h < 1;
+  const videoAspect = vertical ? "9 / 16" : "16 / 9";
+  // One video per column. A lone video takes the full row, except when it is
+  // vertical, where full width would make it absurdly tall.
+  const videoSpan = clips.length === 1 && !vertical ? "full" : "half";
 
-  /* Spread the videos through the images, unless the project asks for
-     all videos first. */
+  /* Order the media. Screenshots always sit at the end; the rest either
+     spread the videos evenly through the images, or run the 1,1,2,2 mix. */
   const media: Item[] = (() => {
-    const imgs: Item[] = shots.map((s) => ({ kind: "img", ...s }));
+    const trailing = new Set(layout.trailing ?? []);
+    const imgs: Item[] = shots.filter((s) => !trailing.has(s.src)).map((s) => ({ kind: "img", ...s }));
+    const tail: Item[] = shots.filter((s) => trailing.has(s.src)).map((s) => ({ kind: "img", ...s }));
     const vids: Item[] = clips.map((v) => ({ kind: "video", ...v }));
-    if (!imgs.length) return vids;
-    if (!vids.length) return imgs;
-    if (layout.order === "videos-first") return [...vids, ...imgs];
+    if (!imgs.length) return [...vids, ...tail];
+    if (!vids.length) return [...imgs, ...tail];
+
     const out: Item[] = [];
-    const every = Math.max(1, Math.floor(imgs.length / vids.length));
     let vi = 0;
+    let ii = 0;
+
+    if (layout.order === "mix") {
+      const pattern: [("v" | "i"), number][] = [
+        ["v", 1],
+        ["i", 1],
+        ["v", 2],
+        ["i", 2],
+      ];
+      let p = 0;
+      while (vi < vids.length || ii < imgs.length) {
+        const [which, n] = pattern[p % pattern.length];
+        p++;
+        for (let k = 0; k < n; k++) {
+          if (which === "v" && vi < vids.length) out.push(vids[vi++]);
+          if (which === "i" && ii < imgs.length) out.push(imgs[ii++]);
+        }
+      }
+      return [...out, ...tail];
+    }
+
+    const every = Math.max(1, Math.floor(imgs.length / vids.length));
     imgs.forEach((img, i) => {
       out.push(img);
       if (vi < vids.length && (i + 1) % every === 0) out.push(vids[vi++]);
     });
     while (vi < vids.length) out.push(vids[vi++]);
-    return out;
+    return [...out, ...tail];
   })();
   // Web projects have no gallery of their own; their hero is the screenshot,
   // and it doubles as a link to the live site.
@@ -149,13 +179,14 @@ export default async function ProjectPage({
         <Gallery
           items={media}
           autoplay={autoplay}
-          videoSpan={layout.videoSpan}
-          videoAspect={layout.videoAspect}
+          videoSpan={videoSpan}
+          videoAspect={videoAspect}
         />
       )}
 
       {siteShot && (
-        <div className="px-4 md:px-6 pb-8 md:pb-16 flex justify-center">
+        /* Sits in the grid like everything else, never centred on its own. */
+        <div className="px-4 md:px-6 pb-8 md:pb-16 grid gap-4 md:gap-6 md:grid-cols-2 items-start">
           <a
             href={project.link}
             target="_blank"
@@ -168,9 +199,8 @@ export default async function ProjectPage({
               alt=""
               width={siteShot.w}
               height={siteShot.h}
-              sizes="(max-width: 767px) 100vw, 92vw"
-              style={{ maxHeight: "var(--preview-max-h)" }}
-              className="w-auto h-auto max-w-full bg-[#ebebe8] transition-opacity duration-200 group-hover:opacity-90"
+              sizes="(max-width: 767px) 100vw, 46vw"
+              className="w-full h-auto bg-[#ebebe8] transition-opacity duration-200 group-hover:opacity-90"
             />
           </a>
         </div>

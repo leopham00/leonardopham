@@ -25,22 +25,30 @@ export function playsVideo(assets: string): boolean {
 }
 
 /**
- * Per project overrides for how media is laid out on the project page.
+ * Per project ordering of media on the project page.
  *
- * videoSpan  "half" puts two videos per row instead of one full-width tile.
- *            Right for vertical Shorts, which look absurd stretched wide.
- * videoAspect the tile's ratio, since a Short is not 16:9.
- * order      "videos-first" runs all videos then all images, instead of
- *            spreading the videos through the gallery.
+ * "mix" alternates videos and images in a 1, 1, 2, 2 rhythm rather than a flat
+ * alternation, keeping the running order within each group so the strongest
+ * videos still lead. Column span and tile ratio are derived, not configured: a
+ * project with a single video gives it the full row, everything else runs one
+ * video per column, and the tile takes the orientation of the project's hero.
+ *
+ * `trailing` pins social media screenshots to the very end. They are context,
+ * not the work, so they should never interrupt it.
  */
 export interface MediaLayout {
-  videoSpan?: "full" | "half";
-  videoAspect?: string;
-  order?: "interleave" | "videos-first";
+  order?: "interleave" | "mix";
+  trailing?: string[];
 }
 
 export const mediaLayout: Record<string, MediaLayout> = {
-  easyherb: { videoSpan: "half", videoAspect: "9 / 16", order: "videos-first" },
+  easyherb: {
+    order: "mix",
+    trailing: ["/work/easyherb/01.webp", "/work/easyherb/05.webp"],
+  },
+  "sacred-embodiment": {
+    trailing: ["/work/sacred-embodiment/01.webp"],
+  },
 };
 
 export function layoutFor(assets: string): MediaLayout {
