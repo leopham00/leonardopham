@@ -16,9 +16,13 @@ export type Item =
 export default function Gallery({
   items,
   autoplay = false,
+  videoSpan = "full",
+  videoAspect = "16 / 9",
 }: {
   items: Item[];
   autoplay?: boolean;
+  videoSpan?: "full" | "half";
+  videoAspect?: string;
 }) {
   const shots = items.filter((i): i is { kind: "img" } & Img => i.kind === "img");
   const [open, setOpen] = useState<number | null>(null);
@@ -57,8 +61,14 @@ export default function Gallery({
                     autoplay ? "&autoplay=1&muted=1&loop=1&background=1" : ""
                   }`;
             return (
-              <div key={`${item.provider}-${item.id}`} className="md:col-span-2">
-                <div className="relative w-full aspect-video bg-[#ebebe8]">
+              <div
+                key={`${item.provider}-${item.id}`}
+                className={videoSpan === "full" ? "md:col-span-2" : ""}
+              >
+                <div
+                  className="relative w-full bg-[#ebebe8]"
+                  style={{ aspectRatio: videoAspect }}
+                >
                   <iframe
                     src={src}
                     title={item.title || "Project video"}

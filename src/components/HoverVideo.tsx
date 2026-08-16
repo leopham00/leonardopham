@@ -19,6 +19,9 @@ interface YTPlayer {
   pauseVideo: () => void;
   mute: () => void;
   getPlayerState: () => number;
+  getCurrentTime: () => number;
+  unloadModule: (name: string) => void;
+  setOption: (module: string, option: string, value: unknown) => void;
 }
 
 declare global {
@@ -32,6 +35,18 @@ declare global {
 }
 
 let apiPromise: Promise<void> | null = null;
+
+/** YouTube can still force subtitles on even with cc_load_policy off. */
+function killCaptions(p: YTPlayer | null) {
+  if (!p) return;
+  try {
+    p.unloadModule("captions");
+    p.unloadModule("cc");
+    p.setOption("captions", "track", {});
+  } catch {
+    /* module may not be loaded yet */
+  }
+}
 
 function loadApi(): Promise<void> {
   if (apiPromise) return apiPromise;
@@ -81,11 +96,28 @@ export default function HoverVideo({
           playsinline: 1,
           fs: 0,
           loop: 1,
+          cc_load_policy: 0,
+          annotations: 3,
         },
         events: {
-          onReady: (e: { target: YTPlayer }) => e.target.mute(),
+          onReady: (e: { target: YTPlayer }) => {
+            e.target.mute();
+            killCaptions(e.target);
+          },
           onStateChange: (e: { data: number }) => {
-            if (e.data === window.YT?.PlayerState.PLAYING) setPlayingId(current.current);
+            if (e.data !== window.YT?.PlayerState.PLAYING) return;
+            killCaptions(player.current);
+            // Reveal only once frames are actually running. PLAYING fires
+            // while the spinner and title card are still on screen.
+            const id = current.current;
+            const started = window.setInterval(() => {
+              const p = player.current;
+              if (!p || current.current !== id) return window.clearInterval(started);
+              if (p.getCurrentTime() > 0.35) {
+                window.clearInterval(started);
+                setPlayingId(id);
+              }
+            }, 60);
           },
         },
       });

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Gallery, { type Item } from "@/components/Gallery";
+import { layoutFor } from "@/lib/clips";
 import NextImage from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -84,12 +85,16 @@ export default async function ProjectPage({
   const next = i < ordered.length - 1 ? ordered[i + 1] : null;
   const clips = videos(project);
   const shots = gallery(project);
-  /* Spread the videos through the images instead of stacking them all up top. */
+  const layout = layoutFor(project.assets);
+
+  /* Spread the videos through the images, unless the project asks for
+     all videos first. */
   const media: Item[] = (() => {
     const imgs: Item[] = shots.map((s) => ({ kind: "img", ...s }));
     const vids: Item[] = clips.map((v) => ({ kind: "video", ...v }));
     if (!imgs.length) return vids;
     if (!vids.length) return imgs;
+    if (layout.order === "videos-first") return [...vids, ...imgs];
     const out: Item[] = [];
     const every = Math.max(1, Math.floor(imgs.length / vids.length));
     let vi = 0;
@@ -141,7 +146,12 @@ export default async function ProjectPage({
       </div>
 
       {media.length > 0 && (
-        <Gallery items={media} autoplay={autoplay} />
+        <Gallery
+          items={media}
+          autoplay={autoplay}
+          videoSpan={layout.videoSpan}
+          videoAspect={layout.videoAspect}
+        />
       )}
 
       {siteShot && (

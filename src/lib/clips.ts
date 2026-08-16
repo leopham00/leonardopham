@@ -23,3 +23,26 @@ export const videoPreview = new Set<string>([
 export function playsVideo(assets: string): boolean {
   return videoPreview.has(assets);
 }
+
+/**
+ * Per project overrides for how media is laid out on the project page.
+ *
+ * videoSpan  "half" puts two videos per row instead of one full-width tile.
+ *            Right for vertical Shorts, which look absurd stretched wide.
+ * videoAspect the tile's ratio, since a Short is not 16:9.
+ * order      "videos-first" runs all videos then all images, instead of
+ *            spreading the videos through the gallery.
+ */
+export interface MediaLayout {
+  videoSpan?: "full" | "half";
+  videoAspect?: string;
+  order?: "interleave" | "videos-first";
+}
+
+export const mediaLayout: Record<string, MediaLayout> = {
+  easyherb: { videoSpan: "half", videoAspect: "9 / 16", order: "videos-first" },
+};
+
+export function layoutFor(assets: string): MediaLayout {
+  return mediaLayout[assets] ?? {};
+}
