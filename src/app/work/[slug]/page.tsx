@@ -72,13 +72,10 @@ function Body({ project }: { project: Project }) {
 
 export default async function ProjectPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ cols?: string }>;
 }) {
   const { slug } = await params;
-  const { cols } = await searchParams;
   const project = getProject(slug);
   if (!project) notFound();
 
@@ -87,9 +84,6 @@ export default async function ProjectPage({
   const next = i < ordered.length - 1 ? ordered[i + 1] : null;
   const clips = videos(project);
   const shots = gallery(project);
-  // Temporary: ?cols=4 to compare a four-column grid.
-  const gridCols = cols === "4" ? 4 : 2;
-
   /* Spread the videos through the images instead of stacking them all up top. */
   const media: Item[] = (() => {
     const imgs: Item[] = shots.map((s) => ({ kind: "img", ...s }));
@@ -147,7 +141,7 @@ export default async function ProjectPage({
       </div>
 
       {media.length > 0 && (
-        <Gallery items={media} cols={gridCols} autoplay={autoplay} />
+        <Gallery items={media} autoplay={autoplay} />
       )}
 
       {siteShot && (

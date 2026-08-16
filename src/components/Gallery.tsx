@@ -15,11 +15,9 @@ export type Item =
  */
 export default function Gallery({
   items,
-  cols = 2,
   autoplay = false,
 }: {
   items: Item[];
-  cols?: 2 | 4;
   autoplay?: boolean;
 }) {
   const shots = items.filter((i): i is { kind: "img" } & Img => i.kind === "img");
@@ -44,12 +42,10 @@ export default function Gallery({
   }, [open, close, shots.length]);
 
   const active = open === null ? null : shots[open];
-  const grid = cols === 4 ? "md:grid-cols-4" : "md:grid-cols-2";
-  const span = cols === 4 ? "md:col-span-4" : "md:col-span-2";
 
   return (
     <>
-      <div className={`px-4 md:px-6 pb-8 md:pb-16 grid gap-4 md:gap-6 ${grid} items-start`}>
+      <div className="px-4 md:px-6 pb-8 md:pb-16 grid gap-4 md:gap-6 md:grid-cols-2 items-start">
         {items.map((item) => {
           if (item.kind === "video") {
             const src =
@@ -61,7 +57,7 @@ export default function Gallery({
                     autoplay ? "&autoplay=1&muted=1&loop=1&background=1" : ""
                   }`;
             return (
-              <div key={`${item.provider}-${item.id}`} className={span}>
+              <div key={`${item.provider}-${item.id}`} className="md:col-span-2">
                 <div className="relative w-full aspect-video bg-[#ebebe8]">
                   <iframe
                     src={src}
@@ -94,7 +90,7 @@ export default function Gallery({
               type="button"
               onClick={() => setOpen(i)}
               aria-label="Open image"
-              className={`block w-full cursor-zoom-in ${wide ? span : ""}`}
+              className={`block w-full cursor-zoom-in ${wide ? "md:col-span-2" : ""}`}
             >
               <Image
                 src={item.src}

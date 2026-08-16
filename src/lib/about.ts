@@ -18,6 +18,7 @@ export interface Role {
 }
 
 export const experience: Role[] = [
+  { title: "Co-Founder + CCO", org: "B&L Collective LLC", years: "2026" },
   { title: "Motion Graphics Designer", org: "1000heads", years: "2025" },
   { title: "Lead Designer", org: "Atheory", years: "2023" },
   { title: "Video Director", org: "VICE News", years: "2023" },
@@ -27,7 +28,7 @@ export const experience: Role[] = [
   { title: "Video Editor", org: "Sacred Embodiment", years: "2021" },
   { title: "Production Assistant", org: "Pacific Clearstream Media Group", years: "2021" },
   { title: "Co-Founder + CCO", org: "Dune Enterprises", years: "2020" },
-  { title: "Director of Photography", org: "J. Paul Getty Trust", years: "2018" },
+  { title: "Freelance Director of Photography", org: "J. Paul Getty Trust", years: "2018" },
   { title: "Videographer + Media Manager", org: "Film and Video Poetry Society", years: "2018" },
 ];
 
@@ -61,6 +62,8 @@ export const skills = [
   "Creative Direction",
   "Brand Identity",
   "Photography",
+  "Sound Design",
+  "Music Production",
 ];
 
 export const tools = [
@@ -72,7 +75,7 @@ export const tools = [
   "InDesign",
   "Lightroom",
   "Figma",
-  "Blender",
+  "Rhino 3D",
   "Ableton Live",
 ];
 
