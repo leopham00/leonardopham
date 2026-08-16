@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import type { Img, Vid } from "@/lib/images.generated";
+import TikTokEmbed from "./TikTokEmbed";
 
 export type Item =
   | ({ kind: "img" } & Img)
@@ -69,10 +70,15 @@ export default function Gallery({
       <div className="px-4 md:px-6 pb-8 md:pb-16 grid gap-4 md:gap-6 md:grid-cols-2 items-start">
         {items.map((item) => {
           if (item.kind === "video") {
+            if (item.provider === "tiktok") {
+              return (
+                <div key={`tiktok-${item.id}`}>
+                  <TikTokEmbed id={item.id} title={item.title} />
+                </div>
+              );
+            }
             const src =
-              item.provider === "tiktok"
-                ? `https://www.tiktok.com/embed/v2/${item.id}`
-                : item.provider === "youtube"
+              item.provider === "youtube"
                 ? `https://www.youtube-nocookie.com/embed/${item.id}?rel=0&modestbranding=1${
                     autoplay ? `&autoplay=1&mute=1&loop=1&playlist=${item.id}&controls=0` : ""
                   }`
@@ -86,9 +92,7 @@ export default function Gallery({
               >
                 <div
                   className="relative w-full bg-[#ebebe8]"
-                  style={{
-                    aspectRatio: item.provider === "tiktok" ? "9 / 16" : videoAspect,
-                  }}
+                  style={{ aspectRatio: videoAspect }}
                 >
                   <iframe
                     src={src}

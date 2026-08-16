@@ -301,10 +301,12 @@ export const projects: Project[] = [
   },
 ];
 
-/** Index order is the positioning: design first, web last. */
-export const orderedProjects: Project[] = DISCIPLINES.flatMap((d) =>
-  projects.filter((p) => p.discipline === d.key),
-);
+/**
+ * The array order above is the display order, full stop. Filters narrow the
+ * list without regrouping it, so a project keeps its position whichever
+ * filter is applied.
+ */
+export const orderedProjects: Project[] = projects;
 
 export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);

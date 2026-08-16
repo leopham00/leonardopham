@@ -14,8 +14,7 @@ import {
   type Project,
 } from "@/lib/work";
 
-const KEYS = DISCIPLINES.map((d) => d.key);
-const ordered = KEYS.flatMap((k) => projects.filter((p) => p.discipline === k));
+const ordered = projects;
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));

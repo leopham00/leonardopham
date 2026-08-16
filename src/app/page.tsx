@@ -16,10 +16,8 @@ export default async function Home({
   const { c } = await searchParams;
   const filter = isDiscipline(c) ? c : null;
 
-  // Discipline order is the positioning: design first, web last.
-  const ordered = filter
-    ? projects.filter((p) => p.discipline === filter)
-    : KEYS.flatMap((k) => projects.filter((p) => p.discipline === k));
+  // One global order; a filter only narrows it.
+  const ordered = filter ? projects.filter((p) => p.discipline === filter) : projects;
 
   return (
     <>

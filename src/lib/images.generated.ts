@@ -493,7 +493,7 @@ export const images: Record<string, Entry> = {
   },
   "google-chrome-dyk": {
     "hero": {
-      "src": "/work/google-chrome-dyk/hero.webp",
+      "src": "/work/google-chrome-dyk/01.webp",
       "w": 1005,
       "h": 1461
     },
@@ -548,7 +548,7 @@ export const images: Record<string, Entry> = {
   },
   "google-chrome-organic": {
     "hero": {
-      "src": "/work/google-chrome-organic/hero.webp",
+      "src": "/work/google-chrome-organic/01.webp",
       "w": 1053,
       "h": 1404
     },
