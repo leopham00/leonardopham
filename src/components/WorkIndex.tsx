@@ -5,7 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Project } from "@/lib/work";
 import { images } from "@/lib/images.generated";
-import { clips, clipFor } from "@/lib/clips";
+import { playsVideo } from "@/lib/clips";
+import HoverVideo from "./HoverVideo";
 
 const CYCLE_MS = 900;
 
@@ -87,23 +88,13 @@ export default function WorkIndex({ projects }: { projects: Project[] }) {
     };
   }, [hovered]);
 
-  // Warm the clips after first paint so a hover never waits on the network.
-  useEffect(() => {
-    const urls = Object.values(clips);
-    if (!urls.length) return;
-    const idle =
-      (window as unknown as { requestIdleCallback?: (cb: () => void) => number })
-        .requestIdleCallback ?? ((cb: () => void) => setTimeout(cb, 1200));
-    idle(() => {
-      for (const url of urls) {
-        const v = document.createElement("video");
-        v.preload = "auto";
-        v.muted = true;
-        v.src = url;
-        v.load();
-      }
-    });
-  }, []);
+  const hoverVideoId =
+    hovered && playsVideo(hovered.assets)
+      ? (images[hovered.assets]?.videos.find((v) => v.provider === "youtube")?.id ?? null)
+      : null;
+  // The hero is a frame of the same video, so its ratio is the video's ratio.
+  const heroImg = hovered ? images[hovered.assets]?.hero : null;
+  const hoverAspect = heroImg ? heroImg.w / heroImg.h : 16 / 9;
 
   const onEnter = (p: Project) => {
     const len = images[p.assets]?.gallery.length ?? 0;
@@ -130,20 +121,7 @@ export default function WorkIndex({ projects }: { projects: Project[] }) {
             visibility: hovered ? "visible" : "hidden",
           }}
         >
-          {hovered && clipFor(hovered.assets) && (
-            <video
-              key={clipFor(hovered.assets)}
-              src={clipFor(hovered.assets)}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="auto"
-              className="max-w-full max-h-full w-auto h-auto object-contain"
-            />
-          )}
-
-          {hovered && !clipFor(hovered.assets) && reel.map((img, i) => (
+          {hovered && reel.map((img, i) => (
             <Image
               key={img!.src}
               src={img!.src}
@@ -158,6 +136,8 @@ export default function WorkIndex({ projects }: { projects: Project[] }) {
               style={{ opacity: i === Math.min(frame, reel.length - 1) ? 1 : 0 }}
             />
           ))}
+
+          <HoverVideo videoId={hoverVideoId} aspect={hoverAspect} />
         </div>
       </div>
 

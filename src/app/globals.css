@@ -63,6 +63,23 @@ body {
   line-height: 1.4;
 }
 
+/*
+ * YouTube replaces the element passed to YT.Player with its own iframe, so the
+ * iframe cannot be styled by className. Target it from the wrapper instead.
+ * min-width/min-height with a 16:9 ratio makes the player cover its box, which
+ * crops the letterboxing YouTube pads around non-16:9 source video.
+ */
+.yt-cover iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+}
+
 /* Focus: visible, square, never a glow. */
 :focus-visible {
   outline: 1px solid var(--color-ink);

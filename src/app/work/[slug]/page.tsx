@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Gallery from "@/components/Gallery";
+import NextImage from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import {
@@ -8,6 +9,7 @@ import {
   DISCIPLINES,
   gallery,
   videos,
+  hero,
   type Project,
 } from "@/lib/work";
 
@@ -82,6 +84,9 @@ export default async function ProjectPage({
   const next = i < ordered.length - 1 ? ordered[i + 1] : null;
   const clips = videos(project);
   const shots = gallery(project);
+  // Web projects have no gallery of their own; their hero is the screenshot,
+  // and it doubles as a link to the live site.
+  const siteShot = shots.length === 0 && project.link ? hero(project) : null;
   // A lone video gets the full width; a set sits two-up.
   const singleVideo = clips.length === 1;
   // Independent Projects is a reel: clips autoplay muted and link out.
@@ -171,6 +176,28 @@ export default async function ProjectPage({
       )}
 
       {shots.length > 0 && <Gallery shots={shots} />}
+
+      {siteShot && (
+        <div className="px-4 md:px-6 pb-8 md:pb-16 flex justify-center">
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Visit ${project.title}`}
+            className="block group"
+          >
+            <NextImage
+              src={siteShot.src}
+              alt=""
+              width={siteShot.w}
+              height={siteShot.h}
+              sizes="(max-width: 767px) 100vw, 92vw"
+              style={{ maxHeight: "var(--preview-max-h)" }}
+              className="w-auto h-auto max-w-full bg-[#ebebe8] transition-opacity duration-200 group-hover:opacity-90"
+            />
+          </a>
+        </div>
+      )}
 
       <nav
         className="border-t border-b border-hairline flex"
