@@ -1,0 +1,83 @@
+{
+  "_comment": "Staging only. Google Chrome TikTok posts pulled via oEmbed, not yet wired to a project. series is set from the on screen Did You Know? card, which the captions do not mention. Move entries into manual-media.json when the split is decided.",
+  "posts": [
+    {
+      "id": "7505042651612335403",
+      "url": "https://www.tiktok.com/@googlechrome/video/7505042651612335403",
+      "title": "Chrome user with one million open tabs, but looking for one in particular? Here\u2019s a shortcut to get you there faster.",
+      "series": "did-you-know"
+    },
+    {
+      "id": "7518023472681880862",
+      "url": "https://www.tiktok.com/@googlechrome/video/7518023472681880862",
+      "title": "Color-coded tab groups are organized tab groups. Organized tab groups are happy tab groups. \ud83c\udf1f",
+      "series": "general"
+    },
+    {
+      "id": "7532129485974441247",
+      "url": "https://www.tiktok.com/@googlechrome/video/7532129485974441247",
+      "title": "Ever wondered, \u201cWhat do you call that thing?\u201d A quick search with Google Lens in Chrome reveals it\u2019s called\u2026 \ud83d\udcad",
+      "series": "general"
+    },
+    {
+      "id": "7533243110931942687",
+      "url": "https://www.tiktok.com/@googlechrome/video/7533243110931942687",
+      "title": "Three ways Chrome shortcuts help you move faster through your tabs, history, and bookmarks.",
+      "series": "general"
+    },
+    {
+      "id": "7541471991765798174",
+      "url": "https://www.tiktok.com/@googlechrome/video/7541471991765798174",
+      "title": "Every time someone organizes their tabs using tab groups, a vacation makes it out of the group chat. \ud83d\ude0e",
+      "series": "general"
+    },
+    {
+      "id": "7543328742970494239",
+      "url": "https://www.tiktok.com/@googlechrome/video/7543328742970494239",
+      "title": "When you customize your Chrome, you set the vibes, and they\u2019re always on point.",
+      "series": "general"
+    },
+    {
+      "id": "7567012042402499871",
+      "url": "https://www.tiktok.com/@googlechrome/video/7567012042402499871",
+      "title": "Keep your friends close and your bookmarks closer with the handy @bookmarks shortcut. \ud83d\udcda",
+      "series": "did-you-know"
+    },
+    {
+      "id": "7572643347949489439",
+      "url": "https://www.tiktok.com/@googlechrome/video/7572643347949489439",
+      "title": "Turn the new tab page into a custom hub for all your favorite web destinations by using the \u201c+Add shortcut\u201d button. \u2795",
+      "series": "did-you-know"
+    },
+    {
+      "id": "7585228805795597599",
+      "url": "https://www.tiktok.com/@googlechrome/video/7585228805795597599",
+      "title": "Sometimes exploring the world means breaking the language barrier. No sweat, you\u2019ve got Translate in Chrome. \ud83c\udf0e",
+      "series": "general"
+    },
+    {
+      "id": "7585601187139915038",
+      "url": "https://www.tiktok.com/@googlechrome/video/7585601187139915038",
+      "title": "TFW you wrap up your work and get to say goodbye. Or if you need those tabs later, you can always save them in a tab group.",
+      "series": "general"
+    },
+    {
+      "id": "7589341177061641503",
+      "url": "https://www.tiktok.com/@googlechrome/video/7589341177061641503",
+      "title": "We have to ask one more time to really make sure. Are you absolutely positive that\u2019s the password you want to go with?",
+      "series": "general"
+    },
+    {
+      "id": "7597504995407236382",
+      "url": "https://www.tiktok.com/@googlechrome/video/7597504995407236382",
+      "title": "Food is good in every language, but you gotta know your options. Translate in Chrome helps you order with ease.",
+      "series": "general"
+    },
+    {
+      "id": "7496882871320218910",
+      "url": "https://www.tiktok.com/@googlechrome/video/7496882871320218910",
+      "title": "Sometimes you need the perfect baked feta pasta. Chrome\u2019s got the shortcuts that make finding it in your browser history easy. \ud83c\udf5d",
+      "series": "did-you-know"
+    }
+  ]
+}
