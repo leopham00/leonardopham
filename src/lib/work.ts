@@ -9,7 +9,7 @@
  * when that differs, e.g. Google Chrome (client) via 1000heads (agency).
  */
 
-export type Discipline = "design" | "video" | "photography" | "web";
+export type Discipline = "design" | "video" | "web" | "etc";
 
 export interface Project {
   slug: string;
@@ -36,8 +36,8 @@ import { images } from "./images.generated";
 export const DISCIPLINES: { key: Discipline; label: string }[] = [
   { key: "design", label: "Design" },
   { key: "video", label: "Video" },
-  { key: "photography", label: "Photography" },
   { key: "web", label: "Web" },
+  { key: "etc", label: "Etc" },
 ];
 
 export const projects: Project[] = [
@@ -197,12 +197,12 @@ export const projects: Project[] = [
     assets: "sacred-embodiment",
   },
 
-  // ── Photography ─────────────────────────────────────────────────────────
+  // ── Etc: photography and personal work ─────────────────────────────────────────────────────────
   {
     slug: "nts-apparel",
     title: "NTS Apparel Line",
     client: "NEWTREND Society",
-    discipline: "photography",
+    discipline: "etc",
     industry: "Fashion",
     role: "Photographer",
     body: "NEWTREND needed to communicate the easy-going positivity of their apparel line. This shoot provides the profiles and lifestyle photos to showcase their identity across their website and socials.",
@@ -212,7 +212,7 @@ export const projects: Project[] = [
     slug: "independent",
     title: "Independent Projects",
     client: "Independent",
-    discipline: "photography",
+    discipline: "etc",
     industry: "Design, art, film",
     role: "Designer, Filmmaker, Photographer",
     body: "Designs, films, and photography made as independent explorations of my art practice.",

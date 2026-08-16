@@ -18,6 +18,7 @@ export interface Role {
 }
 
 export const experience: Role[] = [
+  { title: "Motion Graphics Designer", org: "1000heads", years: "2025" },
   { title: "Lead Designer", org: "Atheory", years: "2023" },
   { title: "Video Director", org: "VICE News", years: "2023" },
   { title: "Creative Director", org: "BREACH Magazine", years: "2022–2023" },
@@ -25,7 +26,6 @@ export const experience: Role[] = [
   { title: "Video Director + Set Designer", org: "CHIVALRY", years: "2021" },
   { title: "Video Editor", org: "Sacred Embodiment", years: "2021" },
   { title: "Production Assistant", org: "Pacific Clearstream Media Group", years: "2021" },
-  { title: "Co-Founder + CCO", org: "Dune Enterprises", years: "2020" },
   { title: "Director of Photography", org: "J. Paul Getty Trust", years: "2018" },
   { title: "Videographer + Media Manager", org: "Film and Video Poetry Society", years: "2018" },
 ];

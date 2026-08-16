@@ -2,13 +2,27 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
-import type { Img } from "@/lib/images.generated";
+import type { Img, Vid } from "@/lib/images.generated";
+
+export type Item =
+  | ({ kind: "img" } & Img)
+  | ({ kind: "video" } & Vid);
 
 /**
- * Project gallery. Clicking a shot opens it in a lightbox over a dimmed page.
- * Closes on the X, on backdrop click, and on Escape.
+ * Project media. Images open in a lightbox over a dimmed page; videos play
+ * inline. Landscape items span the full row rather than sitting centred in a
+ * single column, so the grid keeps its edges.
  */
-export default function Gallery({ shots }: { shots: Img[] }) {
+export default function Gallery({
+  items,
+  cols = 2,
+  autoplay = false,
+}: {
+  items: Item[];
+  cols?: 2 | 4;
+  autoplay?: boolean;
+}) {
+  const shots = items.filter((i): i is { kind: "img" } & Img => i.kind === "img");
   const [open, setOpen] = useState<number | null>(null);
   const close = useCallback(() => setOpen(null), []);
 
@@ -21,7 +35,6 @@ export default function Gallery({ shots }: { shots: Img[] }) {
         setOpen((i) => (i === null ? i : (i - 1 + shots.length) % shots.length));
     };
     document.addEventListener("keydown", onKey);
-    // stop the page scrolling behind the lightbox
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
@@ -31,28 +44,65 @@ export default function Gallery({ shots }: { shots: Img[] }) {
   }, [open, close, shots.length]);
 
   const active = open === null ? null : shots[open];
+  const grid = cols === 4 ? "md:grid-cols-4" : "md:grid-cols-2";
+  const span = cols === 4 ? "md:col-span-4" : "md:col-span-2";
 
   return (
     <>
-      <div className="px-4 md:px-6 pb-8 md:pb-16 grid gap-4 md:gap-6 md:grid-cols-2 items-start">
-        {shots.map((img, i) => {
-          const wide = img.w / img.h > 1.3;
+      <div className={`px-4 md:px-6 pb-8 md:pb-16 grid gap-4 md:gap-6 ${grid} items-start`}>
+        {items.map((item) => {
+          if (item.kind === "video") {
+            const src =
+              item.provider === "youtube"
+                ? `https://www.youtube-nocookie.com/embed/${item.id}?rel=0&modestbranding=1${
+                    autoplay ? `&autoplay=1&mute=1&loop=1&playlist=${item.id}&controls=0` : ""
+                  }`
+                : `https://player.vimeo.com/video/${item.id}?title=0&byline=0&portrait=0${
+                    autoplay ? "&autoplay=1&muted=1&loop=1&background=1" : ""
+                  }`;
+            return (
+              <div key={`${item.provider}-${item.id}`} className={span}>
+                <div className="relative w-full aspect-video bg-[#ebebe8]">
+                  <iframe
+                    src={src}
+                    title={item.title || "Project video"}
+                    loading="lazy"
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full border-0"
+                  />
+                </div>
+                {autoplay && (
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="meta text-muted mt-2 inline-block hover:text-ink transition-colors duration-200"
+                  >
+                    {item.title || "Watch"} ↗
+                  </a>
+                )}
+              </div>
+            );
+          }
+
+          const wide = item.w / item.h > 1.3;
+          const i = shots.indexOf(item);
           return (
             <button
-              key={img.src}
+              key={item.src}
               type="button"
               onClick={() => setOpen(i)}
               aria-label="Open image"
-              className={`flex justify-center w-full cursor-zoom-in ${wide ? "md:col-span-2" : ""}`}
+              className={`block w-full cursor-zoom-in ${wide ? span : ""}`}
             >
               <Image
-                src={img.src}
+                src={item.src}
                 alt=""
-                width={img.w}
-                height={img.h}
+                width={item.w}
+                height={item.h}
                 sizes={wide ? "(max-width: 767px) 100vw, 92vw" : "(max-width: 767px) 100vw, 46vw"}
-                style={{ maxHeight: "var(--preview-max-h)" }}
-                className="w-auto h-auto max-w-full bg-[#ebebe8]"
+                className="w-full h-auto bg-[#ebebe8]"
               />
             </button>
           );
@@ -75,12 +125,15 @@ export default function Gallery({ shots }: { shots: Img[] }) {
             ✕
           </button>
           <Image
+            /* keyed so React mounts a fresh node: without it the browser keeps
+               painting the previously decoded image until the new one loads */
+            key={active.src}
             src={active.src}
             alt=""
             width={active.w}
             height={active.h}
             sizes="100vw"
-            // clicking the image itself must not close the lightbox
+            priority
             onClick={(e) => e.stopPropagation()}
             className="max-w-full max-h-full w-auto h-auto object-contain cursor-default"
           />

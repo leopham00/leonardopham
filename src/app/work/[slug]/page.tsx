@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Gallery from "@/components/Gallery";
+import Gallery, { type Item } from "@/components/Gallery";
 import NextImage from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -72,10 +72,13 @@ function Body({ project }: { project: Project }) {
 
 export default async function ProjectPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ cols?: string }>;
 }) {
   const { slug } = await params;
+  const { cols } = await searchParams;
   const project = getProject(slug);
   if (!project) notFound();
 
@@ -84,11 +87,28 @@ export default async function ProjectPage({
   const next = i < ordered.length - 1 ? ordered[i + 1] : null;
   const clips = videos(project);
   const shots = gallery(project);
+  // Temporary: ?cols=4 to compare a four-column grid.
+  const gridCols = cols === "4" ? 4 : 2;
+
+  /* Spread the videos through the images instead of stacking them all up top. */
+  const media: Item[] = (() => {
+    const imgs: Item[] = shots.map((s) => ({ kind: "img", ...s }));
+    const vids: Item[] = clips.map((v) => ({ kind: "video", ...v }));
+    if (!imgs.length) return vids;
+    if (!vids.length) return imgs;
+    const out: Item[] = [];
+    const every = Math.max(1, Math.floor(imgs.length / vids.length));
+    let vi = 0;
+    imgs.forEach((img, i) => {
+      out.push(img);
+      if (vi < vids.length && (i + 1) % every === 0) out.push(vids[vi++]);
+    });
+    while (vi < vids.length) out.push(vids[vi++]);
+    return out;
+  })();
   // Web projects have no gallery of their own; their hero is the screenshot,
   // and it doubles as a link to the live site.
   const siteShot = shots.length === 0 && project.link ? hero(project) : null;
-  // A lone video gets the full width; a set sits two-up.
-  const singleVideo = clips.length === 1;
   // Independent Projects is a reel: clips autoplay muted and link out.
   const autoplay = project.galleryOnly;
 
@@ -126,56 +146,9 @@ export default async function ProjectPage({
         )}
       </div>
 
-      {clips.length > 0 && (
-        <div
-          className={`px-4 md:px-6 pb-8 md:pb-12 grid gap-4 md:gap-6 ${
-            singleVideo ? "grid-cols-1" : "md:grid-cols-2"
-          }`}
-        >
-          {clips.map((v) => {
-            const src =
-              v.provider === "youtube"
-                ? `https://www.youtube-nocookie.com/embed/${v.id}?rel=0&modestbranding=1${
-                    autoplay ? `&autoplay=1&mute=1&loop=1&playlist=${v.id}&controls=0` : ""
-                  }`
-                : `https://player.vimeo.com/video/${v.id}?title=0&byline=0&portrait=0${
-                    autoplay ? "&autoplay=1&muted=1&loop=1&background=1" : ""
-                  }`;
-            const embed = (
-              <div className="relative w-full aspect-video bg-[#ebebe8]">
-                <iframe
-                  src={src}
-                  title={v.title || `${project.title} video`}
-                  loading="lazy"
-                  allow="autoplay; encrypted-media; picture-in-picture"
-                  allowFullScreen
-                  className="absolute inset-0 w-full h-full border-0"
-                />
-              </div>
-            );
-            // In the reel, the whole tile is a link out to the source.
-            return autoplay ? (
-              <a
-                key={v.id}
-                href={v.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group block relative"
-              >
-                {embed}
-                <span className="absolute inset-0 z-10" aria-hidden="true" />
-                <span className="meta text-muted mt-2 block group-hover:text-ink transition-colors duration-200">
-                  {v.title || "Watch"} ↗
-                </span>
-              </a>
-            ) : (
-              <div key={v.id}>{embed}</div>
-            );
-          })}
-        </div>
+      {media.length > 0 && (
+        <Gallery items={media} cols={gridCols} autoplay={autoplay} />
       )}
-
-      {shots.length > 0 && <Gallery shots={shots} />}
 
       {siteShot && (
         <div className="px-4 md:px-6 pb-8 md:pb-16 flex justify-center">

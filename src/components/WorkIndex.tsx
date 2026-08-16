@@ -121,7 +121,7 @@ export default function WorkIndex({ projects }: { projects: Project[] }) {
             visibility: hovered ? "visible" : "hidden",
           }}
         >
-          {hovered && reel.map((img, i) => (
+          {hovered && !hoverVideoId && reel.map((img, i) => (
             <Image
               key={img!.src}
               src={img!.src}

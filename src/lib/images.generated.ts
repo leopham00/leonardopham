@@ -707,16 +707,6 @@ export const images: Record<string, Entry> = {
         "src": "/work/independent/41.webp",
         "w": 2200,
         "h": 2200
-      },
-      {
-        "src": "/work/independent/42.webp",
-        "w": 2200,
-        "h": 3400
-      },
-      {
-        "src": "/work/independent/43.webp",
-        "w": 2200,
-        "h": 3400
       }
     ],
     "videos": [
