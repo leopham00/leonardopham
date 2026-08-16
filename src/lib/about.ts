@@ -4,7 +4,7 @@
  */
 
 export const intro =
-  "Leonardo Pham is a filmmaker and designer from Los Angeles, CA, whose background in advertising, film, and music carries a holistic approach to storytelling.";
+  "Leonardo Pham is a filmmaker and designer from Los Angeles, CA, whose background in advertising, film, and music brings a holistic approach to storytelling.";
 
 export const bio = [
   "Based in Los Angeles, CA, I'm a designer and filmmaker with a passion for storytelling. When I attended the Los Angeles County High School for the Arts for music and fine art, I discovered my love for film. I went on to develop my film and sound installation practices at The Cooper Union, where I fell in love with design. Since then, I have worked as an ad strategist and creative at Interpublic Group and Mediabrands Content Studio, creative directed a fashion and arts magazine, and worked on several media-related productions, blending my experiences in video, design, and sound to craft engaging and memorable stories.",

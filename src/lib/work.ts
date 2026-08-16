@@ -47,7 +47,7 @@ export const projects: Project[] = [
     client: "Personal",
     discipline: "video",
     role: "Graphic Designer",
-    body: "In order to display the range of works and projects in my portfolio, as well as exhibit my motion graphics skill, this motion graphics reel gives the audience a sense of my work.",
+    body: "A reel gathering the motion work from across my portfolio. It covers the range of what I make and gives a quick sense of how it moves.",
     assets: "motion-reel"
   },
   {
@@ -90,7 +90,7 @@ export const projects: Project[] = [
     discipline: "video",
     industry: "Advertising",
     role: "Video Editor",
-    body: "In this outreach campaign, Mediabrands Content Studio called upon its diverse team members to tell their stories. The videos give quick insight into the warm and welcoming environment, and the vulnerability, available to its family.",
+    body: "In this outreach campaign, Mediabrands Content Studio called upon its diverse team members to tell their stories. The videos offer a quick look at the warmth of the place, and at the openness its people bring to it.",
     assets: "mbcs"
   },
   {
@@ -115,7 +115,7 @@ export const projects: Project[] = [
     discipline: "video",
     industry: "Beverage",
     role: "Video Editor",
-    body: "A concept film: the deck made visual. Inspired by the how-tos and lifehacks seen on social platforms, Vitaminwater wanted to lend a hand towards a fresher and healthier lifestyle, and this film showed how that mission would play out on screen.",
+    body: "A concept film: the deck made visual. Inspired by the how-tos and lifehacks seen on social platforms, Vitaminwater wanted to help people towards a fresher, healthier routine, and this film showed how that mission would play out on screen.",
     assets: "vitaminwater"
   },
   {
@@ -135,7 +135,7 @@ export const projects: Project[] = [
     discipline: "design",
     industry: "Film",
     role: "Graphic Designer",
-    body: "A branding project for an animation film festival. The festival's identity played on the concept of animation frames and walks its audience through the different eras and categories of animation: from early experimental animation, to anime and modern animated films. The brand's identity was implemented into posters and a website.",
+    body: "A branding project for an animation film festival. The festival's identity played on the concept of animation frames, walking its audience through the eras and categories of the form: early experimental work, anime, and modern animated film. The brand's identity was implemented into posters and a website.",
     assets: "anamorphosis"
   },
   {
@@ -145,18 +145,18 @@ export const projects: Project[] = [
     discipline: "video",
     industry: "Beverage",
     role: "Video Editor",
-    body: "A concept film: a pitch deck turned into a visual aid. Since much of the world has incorporated Coke into its traditional dishes, the company wanted to explore the building blocks of any meal. Most of all, we wanted to convey what we call the Taste of Together: the flavors that bring us all together.",
+    body: "A concept film: a pitch deck turned into a visual aid. Since much of the world has incorporated Coke into its traditional dishes, the company wanted to explore the building blocks of any meal. Most of all, we wanted to convey what we call the Taste of Togetherness: the flavors that bring us all together.",
     assets: "coke-togetherness"
   },
   {
     slug: "sprite-uproxx",
     title: "Sprite x UPROXX",
-    client: "Sprite × UPROXX",
+    client: "Sprite x UPROXX",
     agency: "Mediabrands Content Studio",
     discipline: "video",
     industry: "Beverage",
     role: "Video Editor",
-    body: "A concept film: a pitch deck translated into something you can actually watch. Sprite is steadfast in supporting the growth and uniqueness of these artists, so to present the many creatives we worked with, this film pieces together the range of upcoming artists and creators in Sprite and UPROXX's collaboration.",
+    body: "A concept film: a pitch deck translated into something you can actually watch. Sprite is steadfast in supporting emerging artists and what makes each of them singular. To present the many creatives involved, this film pieces together the range of talent behind Sprite and UPROXX's collaboration.",
     assets: "sprite"
   },
   {
@@ -167,7 +167,7 @@ export const projects: Project[] = [
     discipline: "design",
     industry: "Healthcare",
     role: "Graphic Designer",
-    body: "In an effort to lend their hand in the movement, Tylenol needed branding concepts for a health insurance initiative and docuseries. These logo variants explore the typography and symbolism that would effectively deliver the project's goals and values.",
+    body: "Tylenol needed branding concepts for a health insurance initiative and the docuseries that went with it. These logo variants explore the typography and symbolism that would effectively deliver the project's goals and values.",
     assets: "tylenol"
   },
   {
@@ -202,7 +202,7 @@ export const projects: Project[] = [
     bodyLinks: [
       { text: "Sacred Embodiment Teachings", href: "https://www.instagram.com/sacred.embodiment.teachings/?hl=en" },
     ],
-    body: "Rosaria Cabrera's Sacred Embodiment Teachings came to our needs in a time of crisis during the pandemic. These Instagram reel ads sought to bring the program's practices in holistic healing to a wider audience.",
+    body: "Rosaria Cabrera's Sacred Embodiment Teachings came to us during the pandemic, when the practice was needed most. These Instagram reel ads sought to bring the program's practices in holistic healing to a wider audience.",
     assets: "sacred-embodiment"
   },
   {
@@ -266,7 +266,7 @@ export const projects: Project[] = [
     discipline: "design",
     industry: "Music",
     role: "Graphic Designer",
-    body: "Pictograms speak louder than words. This project aims to assign symbols that would denote Pitchfork's news and media by music genre.",
+    body: "Pictograms speak louder than words. This project assigns a symbol to each genre, so Pitchfork's news and media can be read at a glance.",
     assets: "pitchfork"
   },
   {

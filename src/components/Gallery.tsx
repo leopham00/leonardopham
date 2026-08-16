@@ -2,12 +2,9 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
-import type { Img, Vid } from "@/lib/images.generated";
+import type { Img } from "@/lib/images.generated";
+import type { Item } from "@/lib/media-order";
 import TikTokEmbed from "./TikTokEmbed";
-
-export type Item =
-  | ({ kind: "img" } & Img)
-  | ({ kind: "video" } & Vid);
 
 /**
  * Project media. Images open in a lightbox over a dimmed page; videos play

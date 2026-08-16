@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Project } from "@/lib/work";
 import { images } from "@/lib/images.generated";
+import { previewReel } from "@/lib/media-order";
 import { playsVideo } from "@/lib/clips";
 import HoverVideo from "./HoverVideo";
 
@@ -12,9 +13,9 @@ const CYCLE_MS = 900;
 
 /**
  * Hovering a row reveals that project's imagery, fixed and centred in the
- * viewport at full opacity, above the list. The hero leads, then the gallery
- * cycles. Each project remembers where its cycle got to, so leaving and
- * returning resumes rather than restarting.
+ * viewport at full opacity, above the list, cycling its stills in the same
+ * order the project page lays them out. Each project remembers where its cycle
+ * got to, so leaving and returning resumes rather than restarting.
  *
  * Every frame of the hovered project is mounted at once and switched by
  * opacity, so a cut never waits on a network fetch. The cycle also refuses to
@@ -29,18 +30,8 @@ export default function WorkIndex({ projects }: { projects: Project[] }) {
   const loaded = useRef<Set<string>>(new Set());
 
   const key = hovered?.assets;
-  const reel = useMemo(() => {
-    const entry = key ? images[key] : undefined;
-    if (!entry) return [];
-    // Projects without their own hero file fall back to gallery[0], so the
-    // hero would otherwise appear twice and collide on key.
-    const seen = new Set<string>();
-    return [entry.hero, ...entry.gallery].filter((img) => {
-      if (!img || seen.has(img.src)) return false;
-      seen.add(img.src);
-      return true;
-    });
-  }, [key]);
+  // Cycles in the same order the project page lays the stills out.
+  const reel = useMemo(() => (hovered ? previewReel(hovered) : []), [hovered]);
 
   const hoverVideoId =
     hovered && playsVideo(hovered.assets)
@@ -64,7 +55,7 @@ export default function WorkIndex({ projects }: { projects: Project[] }) {
         // step forward to the next frame that is actually ready
         for (let i = 1; i <= reel.length; i++) {
           const cand = (f + i) % reel.length;
-          if (loaded.current.has(reel[cand]!.src)) {
+          if (loaded.current.has(reel[cand].src)) {
             resume.current[key] = cand;
             return cand;
           }
@@ -98,10 +89,7 @@ export default function WorkIndex({ projects }: { projects: Project[] }) {
   }, [hovered]);
 
   const onEnter = (p: Project) => {
-    const entry = images[p.assets];
-    const len = entry
-      ? new Set([entry.hero?.src, ...entry.gallery.map((g) => g.src)].filter(Boolean)).size
-      : 0;
+    const len = previewReel(p).length;
     const want = resume.current[p.assets] ?? 0;
     setFrame(want < len ? want : 0);
     setHovered(p);
@@ -126,14 +114,14 @@ export default function WorkIndex({ projects }: { projects: Project[] }) {
         >
           {hovered && !hoverVideoId && reel.map((img, i) => (
             <Image
-              key={img!.src}
-              src={img!.src}
+              key={img.src}
+              src={img.src}
               alt=""
-              width={img!.w}
-              height={img!.h}
+              width={img.w}
+              height={img.h}
               sizes="(max-width: 1200px) 45vw, 560px"
               priority={i === 0}
-              onLoad={() => markLoaded(img!.src)}
+              onLoad={() => markLoaded(img.src)}
               // Scale to whichever bound it meets first, never past either.
               className="absolute max-w-full max-h-full w-auto h-auto object-contain transition-opacity duration-150 ease-out"
               style={{ opacity: i === Math.min(frame, reel.length - 1) ? 1 : 0 }}
