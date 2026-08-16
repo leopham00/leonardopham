@@ -34,6 +34,7 @@ export function playsVideo(assets: string): boolean {
  *            context, not the work, so they never interrupt it.
  * pairs      images that must sit side by side on the same row.
  * videoAfter place the video after this many images instead of interleaving.
+ * hideStills keep the stills for the hover preview but off the project page.
  *
  * Column span and tile ratio are derived, not configured: a project with a
  * single landscape video gives it the full row, everything else runs one video
@@ -44,12 +45,15 @@ export interface MediaLayout {
   trailing?: string[];
   pairs?: [string, string][];
   videoAfter?: number;
+  /** Keep the stills for the hover preview but leave them off the page. */
+  hideStills?: boolean;
 }
 
 export const mediaLayout: Record<string, MediaLayout> = {
-  // TikTok cards carry their own chrome and cannot autoplay, so they run as a
-  // plain grid rather than being mixed with stills.
-  "google-chrome": { order: "interleave" },
+  // The stills are only there to feed the hover preview. On the page itself
+  // the TikTok cards are the work, so the thumbnails would just repeat them.
+  "google-chrome-dyk": { hideStills: true },
+  "google-chrome-organic": { hideStills: true },
   easyherb: {
     order: "mix",
     trailing: ["/work/easyherb/01.webp", "/work/easyherb/05.webp"],

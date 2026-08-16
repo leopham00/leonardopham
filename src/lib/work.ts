@@ -198,15 +198,26 @@ export const projects: Project[] = [
   },
 
   {
-    slug: "google-chrome",
-    title: "Google Chrome",
-    client: "Google Chrome",
+    slug: "google-chrome-did-you-know",
+    title: "Google Chrome: Did You Know? Series",
+    client: "Google",
     agency: "1000heads",
     discipline: "video",
     industry: "Technology",
     role: "Motion Graphics Designer",
-    body: "Short form social work for Chrome, built around the small shortcuts people actually use: translating a menu abroad, pulling up bookmarks, finding a recipe without the scroll. Each cut has to land the feature in the first second and still be worth watching to the end.",
-    assets: "google-chrome",
+    body: "Chrome is full of features most people never find. This series exists to show them off: each cut takes one lesser known shortcut and solves a small problem the viewer did not know they could solve. Short, repeatable, and built so the answer lands before anyone thinks about scrolling.",
+    assets: "google-chrome-dyk",
+  },
+  {
+    slug: "google-chrome-organic",
+    title: "Google Chrome: Organic Content",
+    client: "Google",
+    agency: "1000heads",
+    discipline: "video",
+    industry: "Technology",
+    role: "Motion Graphics Designer",
+    body: "Ongoing social work for Chrome, built around the small things people actually do with a browser: wrangling a hundred open tabs, translating a menu abroad, finding a recipe without the scroll. Each piece has to land its feature in the first second and still be worth watching to the end.",
+    assets: "google-chrome-organic",
   },
 
   // ── Etc: photography and personal work ─────────────────────────────────────────────────────────

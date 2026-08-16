@@ -97,6 +97,7 @@ export default async function ProjectPage({
   /* Order the media, then pack it so a full width item never leaves a column
      empty behind it. Screenshots stay pinned to the end. */
   const media: Item[] = (() => {
+    if (layout.hideStills) return clips.map((v) => ({ kind: "video", ...v }));
     const trailing = new Set(layout.trailing ?? []);
     const imgs: Item[] = shots
       .filter((s) => !trailing.has(s.src))
