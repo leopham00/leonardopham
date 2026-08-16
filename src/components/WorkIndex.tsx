@@ -122,7 +122,6 @@ export default function WorkIndex({ projects }: { projects: Project[] }) {
                   </span>
                   <span className="meta text-muted md:ml-auto md:text-right shrink-0 md:whitespace-nowrap">
                     {p.client}
-                    {p.agency && <span className="opacity-70"> via {p.agency}</span>}
                     <span className="mx-2 opacity-40">·</span>
                     {p.role}
                   </span>

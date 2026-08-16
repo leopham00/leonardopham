@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { contact } from "@/lib/about";
-import PreviewBoundsTuner from "@/components/PreviewBoundsTuner";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -69,8 +68,6 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
-
-        {process.env.NODE_ENV !== "production" && <PreviewBoundsTuner />}
       </body>
     </html>
   );

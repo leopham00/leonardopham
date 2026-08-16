@@ -6,5 +6,5 @@
  * These seed the --preview-max-w / --preview-max-h CSS variables. The dev
  * overlay tunes those live; paste the saved numbers back here to commit them.
  */
-export const PREVIEW_MAX_W = 540;
-export const PREVIEW_MAX_H = 620;
+export const PREVIEW_MAX_W = 700;
+export const PREVIEW_MAX_H = 700;

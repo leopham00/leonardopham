@@ -24,8 +24,8 @@
  * values live in src/lib/preview-bounds.ts.
  */
 :root {
-  --preview-max-w: 540px;
-  --preview-max-h: 620px;
+  --preview-max-w: 700px;
+  --preview-max-h: 700px;
 }
 
 *,
