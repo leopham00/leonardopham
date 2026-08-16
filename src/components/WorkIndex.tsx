@@ -42,6 +42,14 @@ export default function WorkIndex({ projects }: { projects: Project[] }) {
     });
   }, [key]);
 
+  const hoverVideoId =
+    hovered && playsVideo(hovered.assets)
+      ? (images[hovered.assets]?.videos.find((v) => v.provider === "youtube")?.id ?? null)
+      : null;
+  // The hero is a frame of the same video, so its ratio is the video's ratio.
+  const heroImg = hovered ? images[hovered.assets]?.hero : null;
+  const hoverAspect = heroImg ? heroImg.w / heroImg.h : 16 / 9;
+
   const markLoaded = useCallback((src: string) => {
     if (loaded.current.has(src)) return;
     loaded.current.add(src);
@@ -49,7 +57,8 @@ export default function WorkIndex({ projects }: { projects: Project[] }) {
   }, []);
 
   useEffect(() => {
-    if (!key || reel.length < 2) return;
+    // Video projects never mount stills, so cycling them is pure busywork.
+    if (!key || reel.length < 2 || hoverVideoId) return;
     const id = setInterval(() => {
       setFrame((f) => {
         // step forward to the next frame that is actually ready
@@ -64,7 +73,7 @@ export default function WorkIndex({ projects }: { projects: Project[] }) {
       });
     }, CYCLE_MS);
     return () => clearInterval(id);
-  }, [key, reel]);
+  }, [key, reel, hoverVideoId]);
 
   /**
    * Belt and braces for dismissing the preview. onMouseLeave alone misses the
@@ -88,19 +97,13 @@ export default function WorkIndex({ projects }: { projects: Project[] }) {
     };
   }, [hovered]);
 
-  const hoverVideoId =
-    hovered && playsVideo(hovered.assets)
-      ? (images[hovered.assets]?.videos.find((v) => v.provider === "youtube")?.id ?? null)
-      : null;
-  // The hero is a frame of the same video, so its ratio is the video's ratio.
-  const heroImg = hovered ? images[hovered.assets]?.hero : null;
-  const hoverAspect = heroImg ? heroImg.w / heroImg.h : 16 / 9;
-
   const onEnter = (p: Project) => {
-    const len = images[p.assets]?.gallery.length ?? 0;
-    const max = len; // hero + gallery, minus one
+    const entry = images[p.assets];
+    const len = entry
+      ? new Set([entry.hero?.src, ...entry.gallery.map((g) => g.src)].filter(Boolean)).size
+      : 0;
     const want = resume.current[p.assets] ?? 0;
-    setFrame(want > max ? 0 : want);
+    setFrame(want < len ? want : 0);
     setHovered(p);
   };
 
@@ -150,6 +153,7 @@ export default function WorkIndex({ projects }: { projects: Project[] }) {
                 href={`/work/${p.slug}`}
                 onMouseEnter={() => onEnter(p)}
                 onFocus={() => onEnter(p)}
+                onBlur={() => setHovered(null)}
                 className="group flex items-center gap-3 md:gap-6 px-4 md:px-6 py-3 md:py-4 transition-colors duration-200 hover:text-muted"
               >
                 <span className="md:hidden relative shrink-0 w-14 h-14 overflow-hidden bg-[#ebebe8]">

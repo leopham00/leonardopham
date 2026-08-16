@@ -99,11 +99,6 @@ export const images: Record<string, Entry> = {
         "h": 1238
       },
       {
-        "src": "/work/atheory/02.webp",
-        "w": 216,
-        "h": 375
-      },
-      {
         "src": "/work/atheory/03.webp",
         "w": 2200,
         "h": 1596
@@ -943,11 +938,6 @@ export const images: Record<string, Entry> = {
         "src": "/work/pitchfork/01.webp",
         "w": 2152,
         "h": 2035
-      },
-      {
-        "src": "/work/pitchfork/03.webp",
-        "w": 1200,
-        "h": 455
       },
       {
         "src": "/work/pitchfork/04.webp",

@@ -9,16 +9,18 @@ import { useEffect, useRef, useState } from "react";
  * player boots. Instead one player is created up front and switched between
  * videos with loadVideoById, which is near instant after the first load.
  *
- * The still stays visible underneath until playback actually begins, so a
- * hover never shows a black box. The iframe is sized to cover its container,
- * which crops the letterboxing YouTube adds around vertical videos.
+ * The preview stays hidden until playback is genuinely running, so the spinner
+ * and title card never show. The iframe is sized to cover its container, which
+ * crops the letterboxing YouTube adds around vertical video.
  */
 
 interface YTPlayer {
   loadVideoById: (id: string) => void;
   pauseVideo: () => void;
+  playVideo: () => void;
+  seekTo: (seconds: number, allowSeekAhead?: boolean) => void;
   mute: () => void;
-  getPlayerState: () => number;
+  destroy: () => void;
   getCurrentTime: () => number;
   unloadModule: (name: string) => void;
   setOption: (module: string, option: string, value: unknown) => void;
@@ -28,25 +30,13 @@ declare global {
   interface Window {
     YT?: {
       Player: new (el: HTMLElement, opts: Record<string, unknown>) => YTPlayer;
-      PlayerState: { PLAYING: number };
+      PlayerState: { PLAYING: number; ENDED: number };
     };
     onYouTubeIframeAPIReady?: () => void;
   }
 }
 
 let apiPromise: Promise<void> | null = null;
-
-/** YouTube can still force subtitles on even with cc_load_policy off. */
-function killCaptions(p: YTPlayer | null) {
-  if (!p) return;
-  try {
-    p.unloadModule("captions");
-    p.unloadModule("cc");
-    p.setOption("captions", "track", {});
-  } catch {
-    /* module may not be loaded yet */
-  }
-}
 
 function loadApi(): Promise<void> {
   if (apiPromise) return apiPromise;
@@ -64,6 +54,18 @@ function loadApi(): Promise<void> {
   return apiPromise;
 }
 
+/** YouTube can still force subtitles on even with cc_load_policy off. */
+function killCaptions(p: YTPlayer | null) {
+  if (!p) return;
+  try {
+    p.unloadModule("captions");
+    p.unloadModule("cc");
+    p.setOption("captions", "track", {});
+  } catch {
+    /* module may not be loaded yet */
+  }
+}
+
 export default function HoverVideo({
   videoId,
   aspect,
@@ -75,13 +77,18 @@ export default function HoverVideo({
   const host = useRef<HTMLDivElement>(null);
   const player = useRef<YTPlayer | null>(null);
   const current = useRef<string | null>(null);
-  // Track which id is actually playing rather than a bare boolean, so a new
-  // hover never shows the previous video's frame while the swap is in flight.
+  const watch = useRef<number | null>(null);
   const [playingId, setPlayingId] = useState<string | null>(null);
 
-  // Boot one player, once.
   useEffect(() => {
     let cancelled = false;
+    const clearWatch = () => {
+      if (watch.current !== null) {
+        window.clearInterval(watch.current);
+        watch.current = null;
+      }
+    };
+
     loadApi().then(() => {
       if (cancelled || !host.current || player.current || !window.YT) return;
       player.current = new window.YT.Player(host.current, {
@@ -95,7 +102,6 @@ export default function HoverVideo({
           disablekb: 1,
           playsinline: 1,
           fs: 0,
-          loop: 1,
           cc_load_policy: 0,
           annotations: 3,
         },
@@ -103,18 +109,34 @@ export default function HoverVideo({
           onReady: (e: { target: YTPlayer }) => {
             e.target.mute();
             killCaptions(e.target);
+            // A hover that landed while the API was still booting left an id
+            // waiting. Without this the preview stays empty until the user
+            // hovers something else and comes back.
+            if (current.current) e.target.loadVideoById(current.current);
           },
           onStateChange: (e: { data: number }) => {
+            const p = player.current;
+            if (!p) return;
+
+            // playerVars loop does nothing alongside loadVideoById, and the
+            // endscreen would otherwise sit there at full opacity.
+            if (e.data === window.YT?.PlayerState.ENDED) {
+              p.seekTo(0, true);
+              p.playVideo();
+              return;
+            }
             if (e.data !== window.YT?.PlayerState.PLAYING) return;
-            killCaptions(player.current);
-            // Reveal only once frames are actually running. PLAYING fires
+
+            killCaptions(p);
+            // Reveal only once frames are actually running: PLAYING fires
             // while the spinner and title card are still on screen.
             const id = current.current;
-            const started = window.setInterval(() => {
-              const p = player.current;
-              if (!p || current.current !== id) return window.clearInterval(started);
-              if (p.getCurrentTime() > 0.35) {
-                window.clearInterval(started);
+            clearWatch();
+            watch.current = window.setInterval(() => {
+              const pl = player.current;
+              if (!pl || current.current !== id) return clearWatch();
+              if (pl.getCurrentTime() > 0.35) {
+                clearWatch();
                 setPlayingId(id);
               }
             }, 60);
@@ -122,8 +144,16 @@ export default function HoverVideo({
         },
       });
     });
+
     return () => {
       cancelled = true;
+      clearWatch();
+      try {
+        player.current?.destroy();
+      } catch {
+        /* already torn down */
+      }
+      player.current = null;
     };
   }, []);
 

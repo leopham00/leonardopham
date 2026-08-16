@@ -36,7 +36,8 @@ export default function Gallery({
     setOpen(i);
     const pre = new window.Image();
     pre.onload = () => setReady(src);
-    pre.onerror = () => setReady(src);
+    // On failure close rather than paint a broken image glyph on the overlay.
+    pre.onerror = () => setOpen(null);
     pre.src = src;
   }, []);
 

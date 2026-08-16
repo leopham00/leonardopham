@@ -27,18 +27,23 @@ export function playsVideo(assets: string): boolean {
 /**
  * Per project ordering of media on the project page.
  *
- * "mix" alternates videos and images in a 1, 1, 2, 2 rhythm rather than a flat
- * alternation, keeping the running order within each group so the strongest
- * videos still lead. Column span and tile ratio are derived, not configured: a
- * project with a single video gives it the full row, everything else runs one
- * video per column, and the tile takes the orientation of the project's hero.
+ * order      "mix" alternates videos and images in a 1, 1, 2, 2 rhythm rather
+ *            than a flat alternation, keeping the running order within each
+ *            group so the strongest videos still lead.
+ * trailing   social media screenshots, pinned to the very end. They are
+ *            context, not the work, so they never interrupt it.
+ * pairs      images that must sit side by side on the same row.
+ * videoAfter place the video after this many images instead of interleaving.
  *
- * `trailing` pins social media screenshots to the very end. They are context,
- * not the work, so they should never interrupt it.
+ * Column span and tile ratio are derived, not configured: a project with a
+ * single landscape video gives it the full row, everything else runs one video
+ * per column, and the tile takes the orientation of the project's hero.
  */
 export interface MediaLayout {
   order?: "interleave" | "mix";
   trailing?: string[];
+  pairs?: [string, string][];
+  videoAfter?: number;
 }
 
 export const mediaLayout: Record<string, MediaLayout> = {
@@ -48,6 +53,15 @@ export const mediaLayout: Record<string, MediaLayout> = {
   },
   "sacred-embodiment": {
     trailing: ["/work/sacred-embodiment/01.webp"],
+  },
+  breach: {
+    pairs: [["/work/breach/17.webp", "/work/breach/19.webp"]],
+  },
+  atheory: {
+    pairs: [["/work/atheory/06.webp", "/work/atheory/04.webp"]],
+  },
+  anamorphosis: {
+    videoAfter: 3,
   },
 };
 
