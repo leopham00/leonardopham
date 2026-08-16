@@ -26,9 +26,9 @@ export default async function Home({
           Brand identity, motion, and digital design.
         </h1>
         <p className="mt-5 max-w-[52ch] text-[0.95rem] leading-[1.65] text-muted">
-          I&apos;m Leonardo Pham, a designer and filmmaker in Los Angeles. I build identities
-          and the films that carry them. Previously creative director at BREACH Magazine,
-          lead designer at Atheory, and video director at VICE News.
+          I build identities, motion, and films that bring a brand&apos;s voice to life.
+          Previously creative director at BREACH Magazine, lead designer at Atheory, and
+          video director at VICE News.
         </p>
       </div>
 
