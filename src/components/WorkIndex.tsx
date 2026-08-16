@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Project } from "@/lib/work";
 import { images } from "@/lib/images.generated";
+import { clips, clipFor } from "@/lib/clips";
 
 const CYCLE_MS = 900;
 
@@ -29,7 +30,15 @@ export default function WorkIndex({ projects }: { projects: Project[] }) {
   const key = hovered?.assets;
   const reel = useMemo(() => {
     const entry = key ? images[key] : undefined;
-    return entry ? [entry.hero, ...entry.gallery].filter(Boolean) : [];
+    if (!entry) return [];
+    // Projects without their own hero file fall back to gallery[0], so the
+    // hero would otherwise appear twice and collide on key.
+    const seen = new Set<string>();
+    return [entry.hero, ...entry.gallery].filter((img) => {
+      if (!img || seen.has(img.src)) return false;
+      seen.add(img.src);
+      return true;
+    });
   }, [key]);
 
   const markLoaded = useCallback((src: string) => {
@@ -56,6 +65,46 @@ export default function WorkIndex({ projects }: { projects: Project[] }) {
     return () => clearInterval(id);
   }, [key, reel]);
 
+  /**
+   * Belt and braces for dismissing the preview. onMouseLeave alone misses the
+   * cases that leave one stuck: scrolling with the cursor still (no pointer
+   * event fires, but the row underneath changes), the pointer leaving the
+   * window, and the tab losing focus.
+   */
+  useEffect(() => {
+    if (!hovered) return;
+    const clear = () => setHovered(null);
+    const onPointerOut = (e: PointerEvent) => {
+      if (!e.relatedTarget) clear();
+    };
+    window.addEventListener("scroll", clear, { passive: true });
+    window.addEventListener("blur", clear);
+    document.addEventListener("pointerout", onPointerOut);
+    return () => {
+      window.removeEventListener("scroll", clear);
+      window.removeEventListener("blur", clear);
+      document.removeEventListener("pointerout", onPointerOut);
+    };
+  }, [hovered]);
+
+  // Warm the clips after first paint so a hover never waits on the network.
+  useEffect(() => {
+    const urls = Object.values(clips);
+    if (!urls.length) return;
+    const idle =
+      (window as unknown as { requestIdleCallback?: (cb: () => void) => number })
+        .requestIdleCallback ?? ((cb: () => void) => setTimeout(cb, 1200));
+    idle(() => {
+      for (const url of urls) {
+        const v = document.createElement("video");
+        v.preload = "auto";
+        v.muted = true;
+        v.src = url;
+        v.load();
+      }
+    });
+  }, []);
+
   const onEnter = (p: Project) => {
     const len = images[p.assets]?.gallery.length ?? 0;
     const max = len; // hero + gallery, minus one
@@ -81,7 +130,20 @@ export default function WorkIndex({ projects }: { projects: Project[] }) {
             visibility: hovered ? "visible" : "hidden",
           }}
         >
-          {hovered && reel.map((img, i) => (
+          {hovered && clipFor(hovered.assets) && (
+            <video
+              key={clipFor(hovered.assets)}
+              src={clipFor(hovered.assets)}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              className="max-w-full max-h-full w-auto h-auto object-contain"
+            />
+          )}
+
+          {hovered && !clipFor(hovered.assets) && reel.map((img, i) => (
             <Image
               key={img!.src}
               src={img!.src}

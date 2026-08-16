@@ -42,7 +42,9 @@ body {
   background: var(--color-ground);
   color: var(--color-ink);
   font-family: var(--font-display);
-  overflow-x: hidden;
+  /* clip, not hidden: hidden makes body a scroll container, which stops
+     scroll events reaching window and silently breaks scroll listeners */
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
