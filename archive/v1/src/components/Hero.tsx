@@ -37,7 +37,7 @@ export default function Hero({ onContactClick }: HeroProps) {
           transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           className="text-[clamp(1.75rem,4.5vw,3.2rem)] font-normal leading-[1.25] tracking-[-0.015em] max-w-[900px] text-foreground"
         >
-          Creative developer in Southern California making social media content,
+          Design engineer in Southern California making social media content,
           websites, and software for businesses that want to cut through the
           noise{" "}
           <span className="text-muted">

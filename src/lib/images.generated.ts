@@ -1,0 +1,1191 @@
+// AUTO-GENERATED from the Readymag source. Do not edit by hand.
+
+export interface Img { src: string; w: number; h: number }
+export interface Vid { provider: 'youtube' | 'vimeo'; id: string; url: string; title: string }
+export interface Entry { hero: Img | null; gallery: Img[]; videos: Vid[] }
+
+export const images: Record<string, Entry> = {
+  "addvo": {
+    "hero": {
+      "src": "/work/addvo/hero.webp",
+      "w": 1280,
+      "h": 800
+    },
+    "gallery": [],
+    "videos": []
+  },
+  "anamorphosis": {
+    "hero": {
+      "src": "/work/anamorphosis/01.webp",
+      "w": 2200,
+      "h": 1207
+    },
+    "gallery": [
+      {
+        "src": "/work/anamorphosis/01.webp",
+        "w": 2200,
+        "h": 1207
+      },
+      {
+        "src": "/work/anamorphosis/02.webp",
+        "w": 2200,
+        "h": 3311
+      },
+      {
+        "src": "/work/anamorphosis/03.webp",
+        "w": 2200,
+        "h": 3303
+      },
+      {
+        "src": "/work/anamorphosis/04.webp",
+        "w": 869,
+        "h": 2179
+      },
+      {
+        "src": "/work/anamorphosis/05.webp",
+        "w": 2200,
+        "h": 2933
+      },
+      {
+        "src": "/work/anamorphosis/06.webp",
+        "w": 832,
+        "h": 1280
+      },
+      {
+        "src": "/work/anamorphosis/07.webp",
+        "w": 2200,
+        "h": 2186
+      },
+      {
+        "src": "/work/anamorphosis/08.webp",
+        "w": 2200,
+        "h": 2255
+      },
+      {
+        "src": "/work/anamorphosis/09.webp",
+        "w": 876,
+        "h": 1280
+      },
+      {
+        "src": "/work/anamorphosis/10.webp",
+        "w": 853,
+        "h": 1236
+      },
+      {
+        "src": "/work/anamorphosis/11.webp",
+        "w": 853,
+        "h": 1252
+      }
+    ],
+    "videos": [
+      {
+        "provider": "youtube",
+        "id": "SwBDRSvXVok",
+        "url": "https://youtu.be/SwBDRSvXVok",
+        "title": "Anamorphosis Site Recording"
+      }
+    ]
+  },
+  "atheory": {
+    "hero": {
+      "src": "/work/atheory/01.webp",
+      "w": 2200,
+      "h": 1238
+    },
+    "gallery": [
+      {
+        "src": "/work/atheory/01.webp",
+        "w": 2200,
+        "h": 1238
+      },
+      {
+        "src": "/work/atheory/02.webp",
+        "w": 216,
+        "h": 375
+      },
+      {
+        "src": "/work/atheory/03.webp",
+        "w": 2200,
+        "h": 1596
+      },
+      {
+        "src": "/work/atheory/04.webp",
+        "w": 1451,
+        "h": 1378
+      },
+      {
+        "src": "/work/atheory/05.webp",
+        "w": 1467,
+        "h": 1023
+      },
+      {
+        "src": "/work/atheory/06.webp",
+        "w": 253,
+        "h": 240
+      },
+      {
+        "src": "/work/atheory/07.webp",
+        "w": 2200,
+        "h": 357
+      },
+      {
+        "src": "/work/atheory/08.webp",
+        "w": 2200,
+        "h": 664
+      },
+      {
+        "src": "/work/atheory/09.webp",
+        "w": 2200,
+        "h": 2025
+      },
+      {
+        "src": "/work/atheory/10.webp",
+        "w": 2200,
+        "h": 1336
+      },
+      {
+        "src": "/work/atheory/11.webp",
+        "w": 1869,
+        "h": 1419
+      },
+      {
+        "src": "/work/atheory/12.webp",
+        "w": 1855,
+        "h": 1415
+      },
+      {
+        "src": "/work/atheory/13.webp",
+        "w": 2200,
+        "h": 1293
+      },
+      {
+        "src": "/work/atheory/14.webp",
+        "w": 2200,
+        "h": 1320
+      },
+      {
+        "src": "/work/atheory/15.webp",
+        "w": 2200,
+        "h": 730
+      },
+      {
+        "src": "/work/atheory/16.webp",
+        "w": 907,
+        "h": 901
+      },
+      {
+        "src": "/work/atheory/17.webp",
+        "w": 1793,
+        "h": 1176
+      },
+      {
+        "src": "/work/atheory/18.webp",
+        "w": 2200,
+        "h": 1275
+      },
+      {
+        "src": "/work/atheory/19.webp",
+        "w": 2200,
+        "h": 1394
+      },
+      {
+        "src": "/work/atheory/20.webp",
+        "w": 2200,
+        "h": 1100
+      },
+      {
+        "src": "/work/atheory/21.webp",
+        "w": 2200,
+        "h": 958
+      },
+      {
+        "src": "/work/atheory/22.webp",
+        "w": 2200,
+        "h": 1111
+      }
+    ],
+    "videos": []
+  },
+  "bl-demos": {
+    "hero": {
+      "src": "/work/bl-demos/hero.webp",
+      "w": 1440,
+      "h": 900
+    },
+    "gallery": [],
+    "videos": []
+  },
+  "breach": {
+    "hero": {
+      "src": "/work/breach/01.webp",
+      "w": 2200,
+      "h": 581
+    },
+    "gallery": [
+      {
+        "src": "/work/breach/01.webp",
+        "w": 2200,
+        "h": 581
+      },
+      {
+        "src": "/work/breach/02.webp",
+        "w": 2200,
+        "h": 2569
+      },
+      {
+        "src": "/work/breach/03.webp",
+        "w": 2200,
+        "h": 2646
+      },
+      {
+        "src": "/work/breach/04.webp",
+        "w": 260,
+        "h": 349
+      },
+      {
+        "src": "/work/breach/05.webp",
+        "w": 253,
+        "h": 337
+      },
+      {
+        "src": "/work/breach/06.webp",
+        "w": 259,
+        "h": 349
+      },
+      {
+        "src": "/work/breach/07.webp",
+        "w": 387,
+        "h": 733
+      },
+      {
+        "src": "/work/breach/08.webp",
+        "w": 1684,
+        "h": 1117
+      },
+      {
+        "src": "/work/breach/09.webp",
+        "w": 387,
+        "h": 617
+      },
+      {
+        "src": "/work/breach/10.webp",
+        "w": 1684,
+        "h": 1117
+      },
+      {
+        "src": "/work/breach/13.webp",
+        "w": 1728,
+        "h": 11301
+      },
+      {
+        "src": "/work/breach/14.webp",
+        "w": 1915,
+        "h": 11235
+      },
+      {
+        "src": "/work/breach/16.webp",
+        "w": 2200,
+        "h": 1386
+      },
+      {
+        "src": "/work/breach/17.webp",
+        "w": 1728,
+        "h": 4560
+      },
+      {
+        "src": "/work/breach/18.webp",
+        "w": 2200,
+        "h": 1419
+      },
+      {
+        "src": "/work/breach/19.webp",
+        "w": 451,
+        "h": 875
+      },
+      {
+        "src": "/work/breach/20.webp",
+        "w": 2200,
+        "h": 1418
+      },
+      {
+        "src": "/work/breach/21.webp",
+        "w": 841,
+        "h": 800
+      },
+      {
+        "src": "/work/breach/22.webp",
+        "w": 560,
+        "h": 611
+      },
+      {
+        "src": "/work/breach/23.webp",
+        "w": 558,
+        "h": 614
+      },
+      {
+        "src": "/work/breach/24.webp",
+        "w": 2200,
+        "h": 412
+      },
+      {
+        "src": "/work/breach/25.webp",
+        "w": 2200,
+        "h": 952
+      }
+    ],
+    "videos": []
+  },
+  "brownings": {
+    "hero": {
+      "src": "/work/brownings/hero.webp",
+      "w": 1280,
+      "h": 800
+    },
+    "gallery": [],
+    "videos": []
+  },
+  "coke-cj-henry": {
+    "hero": {
+      "src": "/work/coke-cj-henry/hero.webp",
+      "w": 408,
+      "h": 720
+    },
+    "gallery": [],
+    "videos": [
+      {
+        "provider": "youtube",
+        "id": "VzySrnTq7UI",
+        "url": "https://youtu.be/VzySrnTq7UI",
+        "title": "Coke x CJHenry"
+      }
+    ]
+  },
+  "coke-togetherness": {
+    "hero": {
+      "src": "/work/coke-togetherness/hero.webp",
+      "w": 1280,
+      "h": 720
+    },
+    "gallery": [],
+    "videos": [
+      {
+        "provider": "youtube",
+        "id": "fb19aENcG0A",
+        "url": "https://youtu.be/fb19aENcG0A",
+        "title": "Coke: Taste of Togetherness"
+      }
+    ]
+  },
+  "crulink": {
+    "hero": {
+      "src": "/work/crulink/hero.webp",
+      "w": 1280,
+      "h": 800
+    },
+    "gallery": [],
+    "videos": []
+  },
+  "easyherb": {
+    "hero": {
+      "src": "/work/easyherb/hero.webp",
+      "w": 1280,
+      "h": 2400
+    },
+    "gallery": [
+      {
+        "src": "/work/easyherb/01.webp",
+        "w": 1125,
+        "h": 1644
+      },
+      {
+        "src": "/work/easyherb/02.webp",
+        "w": 2200,
+        "h": 3216
+      },
+      {
+        "src": "/work/easyherb/03.webp",
+        "w": 2200,
+        "h": 3174
+      },
+      {
+        "src": "/work/easyherb/04.webp",
+        "w": 2200,
+        "h": 3215
+      },
+      {
+        "src": "/work/easyherb/05.webp",
+        "w": 1125,
+        "h": 1731
+      },
+      {
+        "src": "/work/easyherb/06.webp",
+        "w": 2200,
+        "h": 3216
+      },
+      {
+        "src": "/work/easyherb/07.webp",
+        "w": 2200,
+        "h": 3175
+      },
+      {
+        "src": "/work/easyherb/08.webp",
+        "w": 2200,
+        "h": 3216
+      }
+    ],
+    "videos": [
+      {
+        "provider": "youtube",
+        "id": "zQ4Le_cCUzE",
+        "url": "https://youtu.be/zQ4Le_cCUzE",
+        "title": "EasyHerb: Dare To Daze"
+      },
+      {
+        "provider": "youtube",
+        "id": "C_xi36p9RSQ",
+        "url": "https://youtu.be/C_xi36p9RSQ",
+        "title": "EasyHerb: All You Need"
+      },
+      {
+        "provider": "youtube",
+        "id": "rCkgiSjDxD8",
+        "url": "https://youtu.be/rCkgiSjDxD8",
+        "title": "EasyHerb: Take Your Time"
+      },
+      {
+        "provider": "youtube",
+        "id": "SQ2NMuv97UI",
+        "url": "https://youtu.be/SQ2NMuv97UI",
+        "title": "EasyHerb: Take It Slow"
+      },
+      {
+        "provider": "youtube",
+        "id": "74yp7OCxnjo",
+        "url": "https://youtu.be/74yp7OCxnjo",
+        "title": "EasyHerb: Take It Slow 2"
+      },
+      {
+        "provider": "youtube",
+        "id": "_5xRiHfdzoA",
+        "url": "https://youtu.be/_5xRiHfdzoA",
+        "title": "EasyHerb: Keep It Light"
+      },
+      {
+        "provider": "youtube",
+        "id": "mQMS04BEqNo",
+        "url": "https://youtu.be/mQMS04BEqNo",
+        "title": "EasyHerb: Keep It Light"
+      },
+      {
+        "provider": "youtube",
+        "id": "kGJ3IC-UxXY",
+        "url": "https://youtu.be/kGJ3IC-UxXY",
+        "title": "EasyHerb: Test Shoot"
+      },
+      {
+        "provider": "youtube",
+        "id": "iklnBek2vek",
+        "url": "https://youtu.be/iklnBek2vek",
+        "title": "EasyHerb: Take a Breather"
+      },
+      {
+        "provider": "youtube",
+        "id": "YpV0dJXhmR0",
+        "url": "https://youtu.be/YpV0dJXhmR0",
+        "title": "EasyHerb: Take a Pause"
+      }
+    ]
+  },
+  "independent": {
+    "hero": {
+      "src": "/work/independent/hero.webp",
+      "w": 1280,
+      "h": 720
+    },
+    "gallery": [
+      {
+        "src": "/work/independent/01.webp",
+        "w": 1397,
+        "h": 2000
+      },
+      {
+        "src": "/work/independent/02.webp",
+        "w": 716,
+        "h": 1051
+      },
+      {
+        "src": "/work/independent/03.webp",
+        "w": 2200,
+        "h": 2200
+      },
+      {
+        "src": "/work/independent/04.webp",
+        "w": 2200,
+        "h": 2200
+      },
+      {
+        "src": "/work/independent/05.webp",
+        "w": 2200,
+        "h": 2200
+      },
+      {
+        "src": "/work/independent/06.webp",
+        "w": 2200,
+        "h": 2200
+      },
+      {
+        "src": "/work/independent/07.webp",
+        "w": 2200,
+        "h": 2200
+      },
+      {
+        "src": "/work/independent/08.webp",
+        "w": 2200,
+        "h": 2200
+      },
+      {
+        "src": "/work/independent/09.webp",
+        "w": 2200,
+        "h": 2957
+      },
+      {
+        "src": "/work/independent/10.webp",
+        "w": 2200,
+        "h": 3080
+      },
+      {
+        "src": "/work/independent/11.webp",
+        "w": 2200,
+        "h": 2200
+      },
+      {
+        "src": "/work/independent/12.webp",
+        "w": 2200,
+        "h": 3045
+      },
+      {
+        "src": "/work/independent/13.webp",
+        "w": 2200,
+        "h": 3045
+      },
+      {
+        "src": "/work/independent/14.webp",
+        "w": 2200,
+        "h": 2933
+      },
+      {
+        "src": "/work/independent/15.webp",
+        "w": 2200,
+        "h": 1314
+      },
+      {
+        "src": "/work/independent/16.webp",
+        "w": 2200,
+        "h": 3067
+      },
+      {
+        "src": "/work/independent/17.webp",
+        "w": 1280,
+        "h": 1728
+      },
+      {
+        "src": "/work/independent/18.webp",
+        "w": 2200,
+        "h": 1704
+      },
+      {
+        "src": "/work/independent/19.webp",
+        "w": 2200,
+        "h": 1704
+      },
+      {
+        "src": "/work/independent/20.webp",
+        "w": 2200,
+        "h": 1704
+      },
+      {
+        "src": "/work/independent/21.webp",
+        "w": 2200,
+        "h": 1704
+      },
+      {
+        "src": "/work/independent/22.webp",
+        "w": 2200,
+        "h": 1704
+      },
+      {
+        "src": "/work/independent/23.webp",
+        "w": 2200,
+        "h": 2200
+      },
+      {
+        "src": "/work/independent/24.webp",
+        "w": 2200,
+        "h": 2200
+      },
+      {
+        "src": "/work/independent/25.webp",
+        "w": 2200,
+        "h": 2200
+      },
+      {
+        "src": "/work/independent/26.webp",
+        "w": 2200,
+        "h": 2200
+      },
+      {
+        "src": "/work/independent/27.webp",
+        "w": 2200,
+        "h": 2200
+      },
+      {
+        "src": "/work/independent/28.webp",
+        "w": 2200,
+        "h": 3411
+      },
+      {
+        "src": "/work/independent/29.webp",
+        "w": 2200,
+        "h": 2923
+      },
+      {
+        "src": "/work/independent/30.webp",
+        "w": 2200,
+        "h": 2933
+      },
+      {
+        "src": "/work/independent/31.webp",
+        "w": 1800,
+        "h": 2400
+      },
+      {
+        "src": "/work/independent/32.webp",
+        "w": 1296,
+        "h": 1728
+      },
+      {
+        "src": "/work/independent/33.webp",
+        "w": 1224,
+        "h": 792
+      },
+      {
+        "src": "/work/independent/34.webp",
+        "w": 2200,
+        "h": 2933
+      },
+      {
+        "src": "/work/independent/35.webp",
+        "w": 2200,
+        "h": 2933
+      },
+      {
+        "src": "/work/independent/36.webp",
+        "w": 2200,
+        "h": 2933
+      },
+      {
+        "src": "/work/independent/37.webp",
+        "w": 2200,
+        "h": 3300
+      },
+      {
+        "src": "/work/independent/38.webp",
+        "w": 2200,
+        "h": 3300
+      },
+      {
+        "src": "/work/independent/39.webp",
+        "w": 2200,
+        "h": 3045
+      },
+      {
+        "src": "/work/independent/40.webp",
+        "w": 2200,
+        "h": 1458
+      },
+      {
+        "src": "/work/independent/41.webp",
+        "w": 2200,
+        "h": 2200
+      },
+      {
+        "src": "/work/independent/42.webp",
+        "w": 2200,
+        "h": 3400
+      },
+      {
+        "src": "/work/independent/43.webp",
+        "w": 2200,
+        "h": 3400
+      }
+    ],
+    "videos": [
+      {
+        "provider": "vimeo",
+        "id": "319230535",
+        "url": "https://vimeo.com/319230535",
+        "title": "Granddad"
+      },
+      {
+        "provider": "vimeo",
+        "id": "540887132",
+        "url": "https://vimeo.com/540887132",
+        "title": "GrandPrix"
+      },
+      {
+        "provider": "vimeo",
+        "id": "540903571",
+        "url": "https://vimeo.com/540903571",
+        "title": "creep"
+      },
+      {
+        "provider": "vimeo",
+        "id": "409991975",
+        "url": "https://vimeo.com/409991975",
+        "title": "antecedent"
+      },
+      {
+        "provider": "vimeo",
+        "id": "817126505",
+        "url": "https://vimeo.com/817126505",
+        "title": "feedbackdrive_draft1"
+      },
+      {
+        "provider": "vimeo",
+        "id": "418183716",
+        "url": "https://vimeo.com/418183716",
+        "title": "roachmind"
+      },
+      {
+        "provider": "youtube",
+        "id": "RIurQRsvqYA",
+        "url": "https://youtu.be/RIurQRsvqYA",
+        "title": "sent"
+      },
+      {
+        "provider": "vimeo",
+        "id": "507322505",
+        "url": "https://vimeo.com/507322505",
+        "title": "Evcome"
+      },
+      {
+        "provider": "vimeo",
+        "id": "765101195",
+        "url": "https://vimeo.com/765101195",
+        "title": "touchdesigner_reel1.mp4"
+      },
+      {
+        "provider": "youtube",
+        "id": "5RUfymJg6fg",
+        "url": "https://youtu.be/5RUfymJg6fg",
+        "title": "Echo"
+      }
+    ]
+  },
+  "mbcs": {
+    "hero": {
+      "src": "/work/mbcs/hero.webp",
+      "w": 1280,
+      "h": 720
+    },
+    "gallery": [],
+    "videos": [
+      {
+        "provider": "youtube",
+        "id": "1cmrdWIwhgs",
+        "url": "https://youtu.be/1cmrdWIwhgs",
+        "title": "MBCS Outreach - 2min Mix"
+      },
+      {
+        "provider": "youtube",
+        "id": "Ail7YEz__4M",
+        "url": "https://youtu.be/Ail7YEz__4M",
+        "title": "MBCS recruitment JEANETTE1"
+      },
+      {
+        "provider": "youtube",
+        "id": "4pwxmD_6ROU",
+        "url": "https://youtu.be/4pwxmD_6ROU",
+        "title": "MBCS recruitment JEANETTE2"
+      },
+      {
+        "provider": "youtube",
+        "id": "3CkU_ULq5Xc",
+        "url": "https://youtu.be/3CkU_ULq5Xc",
+        "title": "MBCS recruitment MICHELLE3"
+      }
+    ]
+  },
+  "motion-reel": {
+    "hero": {
+      "src": "/work/motion-reel/hero.webp",
+      "w": 2200,
+      "h": 1239
+    },
+    "gallery": [],
+    "videos": [
+      {
+        "provider": "youtube",
+        "id": "K0roS-q_vR4",
+        "url": "https://youtu.be/K0roS-q_vR4",
+        "title": "Motion Graphics Reel 2024"
+      }
+    ]
+  },
+  "nts": {
+    "hero": {
+      "src": "/work/nts/01.webp",
+      "w": 2200,
+      "h": 1238
+    },
+    "gallery": [
+      {
+        "src": "/work/nts/01.webp",
+        "w": 2200,
+        "h": 1238
+      },
+      {
+        "src": "/work/nts/02.webp",
+        "w": 2200,
+        "h": 3300
+      },
+      {
+        "src": "/work/nts/03.webp",
+        "w": 2200,
+        "h": 3300
+      },
+      {
+        "src": "/work/nts/04.webp",
+        "w": 2200,
+        "h": 3300
+      },
+      {
+        "src": "/work/nts/05.webp",
+        "w": 2200,
+        "h": 3300
+      },
+      {
+        "src": "/work/nts/06.webp",
+        "w": 2200,
+        "h": 3300
+      },
+      {
+        "src": "/work/nts/07.webp",
+        "w": 2200,
+        "h": 3300
+      },
+      {
+        "src": "/work/nts/08.webp",
+        "w": 2200,
+        "h": 3300
+      },
+      {
+        "src": "/work/nts/09.webp",
+        "w": 2200,
+        "h": 3300
+      },
+      {
+        "src": "/work/nts/10.webp",
+        "w": 2200,
+        "h": 3300
+      },
+      {
+        "src": "/work/nts/11.webp",
+        "w": 2200,
+        "h": 3300
+      },
+      {
+        "src": "/work/nts/12.webp",
+        "w": 2200,
+        "h": 3300
+      },
+      {
+        "src": "/work/nts/13.webp",
+        "w": 853,
+        "h": 1280
+      },
+      {
+        "src": "/work/nts/14.webp",
+        "w": 2200,
+        "h": 2422
+      },
+      {
+        "src": "/work/nts/15.webp",
+        "w": 2200,
+        "h": 3300
+      },
+      {
+        "src": "/work/nts/16.webp",
+        "w": 853,
+        "h": 1279
+      },
+      {
+        "src": "/work/nts/17.webp",
+        "w": 853,
+        "h": 1264
+      },
+      {
+        "src": "/work/nts/18.webp",
+        "w": 2200,
+        "h": 2430
+      },
+      {
+        "src": "/work/nts/19.webp",
+        "w": 2200,
+        "h": 3300
+      },
+      {
+        "src": "/work/nts/20.webp",
+        "w": 2200,
+        "h": 2429
+      },
+      {
+        "src": "/work/nts/21.webp",
+        "w": 2200,
+        "h": 3300
+      }
+    ],
+    "videos": []
+  },
+  "pitchfork": {
+    "hero": {
+      "src": "/work/pitchfork/01.webp",
+      "w": 2152,
+      "h": 2035
+    },
+    "gallery": [
+      {
+        "src": "/work/pitchfork/01.webp",
+        "w": 2152,
+        "h": 2035
+      },
+      {
+        "src": "/work/pitchfork/02.webp",
+        "w": 430,
+        "h": 193
+      },
+      {
+        "src": "/work/pitchfork/03.webp",
+        "w": 1200,
+        "h": 455
+      },
+      {
+        "src": "/work/pitchfork/04.webp",
+        "w": 1019,
+        "h": 2518
+      },
+      {
+        "src": "/work/pitchfork/05.webp",
+        "w": 772,
+        "h": 1000
+      },
+      {
+        "src": "/work/pitchfork/06.webp",
+        "w": 273,
+        "h": 175
+      },
+      {
+        "src": "/work/pitchfork/07.webp",
+        "w": 2200,
+        "h": 2173
+      },
+      {
+        "src": "/work/pitchfork/08.webp",
+        "w": 2200,
+        "h": 2173
+      },
+      {
+        "src": "/work/pitchfork/09.webp",
+        "w": 2200,
+        "h": 2173
+      },
+      {
+        "src": "/work/pitchfork/10.webp",
+        "w": 2200,
+        "h": 1671
+      },
+      {
+        "src": "/work/pitchfork/11.webp",
+        "w": 2200,
+        "h": 2005
+      },
+      {
+        "src": "/work/pitchfork/12.webp",
+        "w": 2200,
+        "h": 2173
+      },
+      {
+        "src": "/work/pitchfork/13.webp",
+        "w": 2200,
+        "h": 2167
+      },
+      {
+        "src": "/work/pitchfork/14.webp",
+        "w": 2200,
+        "h": 2167
+      }
+    ],
+    "videos": []
+  },
+  "sacred-embodiment": {
+    "hero": {
+      "src": "/work/sacred-embodiment/hero.webp",
+      "w": 1074,
+      "h": 1964
+    },
+    "gallery": [
+      {
+        "src": "/work/sacred-embodiment/01.webp",
+        "w": 1125,
+        "h": 2192
+      }
+    ],
+    "videos": [
+      {
+        "provider": "youtube",
+        "id": "uRoR99UJmx4",
+        "url": "https://youtu.be/uRoR99UJmx4",
+        "title": "ig ad 03 cut02"
+      },
+      {
+        "provider": "youtube",
+        "id": "-KHqQ14M0zc",
+        "url": "https://youtu.be/-KHqQ14M0zc",
+        "title": "ig ad 02 cut02"
+      },
+      {
+        "provider": "youtube",
+        "id": "0-Le2jUDjlE",
+        "url": "https://youtu.be/0-Le2jUDjlE",
+        "title": "ig ad 01 cut02"
+      }
+    ]
+  },
+  "spandrel": {
+    "hero": {
+      "src": "/work/spandrel/hero.webp",
+      "w": 1344,
+      "h": 1284
+    },
+    "gallery": [],
+    "videos": []
+  },
+  "sprite": {
+    "hero": {
+      "src": "/work/sprite/hero.webp",
+      "w": 1280,
+      "h": 720
+    },
+    "gallery": [],
+    "videos": [
+      {
+        "provider": "youtube",
+        "id": "tE9PJ_nkhvk",
+        "url": "https://youtu.be/tE9PJ_nkhvk",
+        "title": "Sprite UPROXX"
+      }
+    ]
+  },
+  "tylenol": {
+    "hero": {
+      "src": "/work/tylenol/01.webp",
+      "w": 2200,
+      "h": 1238
+    },
+    "gallery": [
+      {
+        "src": "/work/tylenol/01.webp",
+        "w": 2200,
+        "h": 1238
+      },
+      {
+        "src": "/work/tylenol/02.webp",
+        "w": 2200,
+        "h": 2957
+      },
+      {
+        "src": "/work/tylenol/03.webp",
+        "w": 2200,
+        "h": 2933
+      },
+      {
+        "src": "/work/tylenol/04.webp",
+        "w": 2200,
+        "h": 2970
+      },
+      {
+        "src": "/work/tylenol/05.webp",
+        "w": 2200,
+        "h": 2957
+      },
+      {
+        "src": "/work/tylenol/06.webp",
+        "w": 2200,
+        "h": 2957
+      },
+      {
+        "src": "/work/tylenol/07.webp",
+        "w": 2200,
+        "h": 2970
+      },
+      {
+        "src": "/work/tylenol/08.webp",
+        "w": 2200,
+        "h": 2957
+      },
+      {
+        "src": "/work/tylenol/09.webp",
+        "w": 2200,
+        "h": 2933
+      },
+      {
+        "src": "/work/tylenol/10.webp",
+        "w": 2200,
+        "h": 2933
+      },
+      {
+        "src": "/work/tylenol/11.webp",
+        "w": 2200,
+        "h": 1927
+      },
+      {
+        "src": "/work/tylenol/12.webp",
+        "w": 2200,
+        "h": 1936
+      }
+    ],
+    "videos": []
+  },
+  "vice": {
+    "hero": {
+      "src": "/work/vice/hero.webp",
+      "w": 1062,
+      "h": 1826
+    },
+    "gallery": [],
+    "videos": [
+      {
+        "provider": "youtube",
+        "id": "BTXRNMnvGLE",
+        "url": "https://youtu.be/BTXRNMnvGLE",
+        "title": "VICE: Drug Moments Tiktok"
+      }
+    ]
+  },
+  "vitaminwater": {
+    "hero": {
+      "src": "/work/vitaminwater/hero.webp",
+      "w": 1280,
+      "h": 720
+    },
+    "gallery": [],
+    "videos": [
+      {
+        "provider": "youtube",
+        "id": "eyGqgBWMBf4",
+        "url": "https://youtu.be/eyGqgBWMBf4",
+        "title": "Vitaminwater #thrivehacks"
+      }
+    ]
+  }
+} as const;

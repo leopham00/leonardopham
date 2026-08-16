@@ -1,73 +1,77 @@
 @import "tailwindcss";
 
+/*
+ * v2 — no containers, no radius, no shadows.
+ * Separation comes from hairlines and whitespace. All color comes from the work.
+ */
+
 @theme inline {
-  --color-background: #ffffff;
-  --color-foreground: #0a0a0a;
-  --color-muted: #6b6b6b;
-  --color-border: #e5e5e5;
-  --color-surface: #f5f5f5;
-  --color-surface-dark: #1a1a1a;
-  --font-sans: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  --color-ground: #fafaf9;
+  --color-ink: #0a0a0a;
+  --color-muted: #737373;
+  --color-hairline: #e0e0dd;
+
+  /* Swapped for Leo's licensed faces via next/font/local once delivered. */
+  --font-display: var(--font-display-local, "Helvetica Neue", Helvetica, Arial, sans-serif);
+  --font-mono: var(--font-mono-local, ui-monospace, "SF Mono", Menlo, monospace);
+
+  --ease-out: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-/* Reset & Base */
+/*
+ * Preview image bounds. Every preview scales up or down until it touches one
+ * of these, never past either. Tunable live via the dev overlay; the committed
+ * values live in src/lib/preview-bounds.ts.
+ */
+:root {
+  --preview-max-w: 540px;
+  --preview-max-h: 620px;
+}
+
+*,
+*::before,
+*::after {
+  border-radius: 0;
+}
+
+html {
+  background: var(--color-ground);
+}
 
 body {
-  background: var(--color-background);
-  color: var(--color-foreground);
-  font-family: var(--font-sans);
+  background: var(--color-ground);
+  color: var(--color-ink);
+  font-family: var(--font-display);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Selection */
 ::selection {
-  background: var(--color-foreground);
-  color: var(--color-background);
+  background: var(--color-ink);
+  color: var(--color-ground);
 }
 
-/* Scrollbar — hidden on mobile, minimal on desktop */
-@media (max-width: 767px) {
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  html {
-    scrollbar-width: none;
-  }
-}
-@media (min-width: 768px) {
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-border);
-    border-radius: 3px;
-  }
+/* Meta type — the mono voice doing all label work. */
+.meta {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.4;
 }
 
-/* Hide scrollbar utility */
-.scrollbar-none::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-none {
-  scrollbar-width: none;
+/* Focus: visible, square, never a glow. */
+:focus-visible {
+  outline: 1px solid var(--color-ink);
+  outline-offset: 3px;
 }
 
-/* Marquee */
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.animate-marquee {
-  animation: marquee 30s linear infinite;
-}
-
-/* Menu overlay */
-.menu-open {
-  overflow: hidden;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

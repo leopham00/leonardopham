@@ -1,93 +1,67 @@
-"use client";
+import Link from "next/link";
+import WorkIndex from "@/components/WorkIndex";
+import { projects, DISCIPLINES, type Discipline } from "@/lib/work";
 
-import { useState, useCallback, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Navigation from "@/components/Navigation";
-import HeroGallery from "@/components/HeroGallery";
-import CTASection from "@/components/CTASection";
-import Footer from "@/components/Footer";
-import ContactModal from "@/components/ContactModal";
+const KEYS = DISCIPLINES.map((d) => d.key);
 
-type Page = "home" | "content" | "websites" | "apps" | "about";
+function isDiscipline(v: string | undefined): v is Discipline {
+  return !!v && (KEYS as string[]).includes(v);
+}
 
-export default function Home() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalSubject, setModalSubject] = useState("");
-  const [activePage, setActivePage] = useState<Page>("home");
-  const [ready, setReady] = useState(false);
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ c?: string }>;
+}) {
+  const { c } = await searchParams;
+  const filter = isDiscipline(c) ? c : null;
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    const t = requestAnimationFrame(() => setReady(true));
-    return () => cancelAnimationFrame(t);
-  }, []);
-
-  const handlePageChange = useCallback((page: Page) => {
-    window.scrollTo({ top: 0, behavior: "instant" });
-    if (page === activePage) return;
-    setActivePage(page);
-  }, [activePage]);
-
-  const openContact = useCallback((subject?: string) => {
-    setModalSubject(subject ?? "Start a Project");
-    setModalOpen(true);
-  }, []);
+  // Discipline order is the positioning: design first, web last.
+  const ordered = filter
+    ? projects.filter((p) => p.discipline === filter)
+    : KEYS.flatMap((k) => projects.filter((p) => p.discipline === k));
 
   return (
-    <AnimatePresence>
-        {ready && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
+    <>
+      <div className="px-4 md:px-6 pt-10 md:pt-16 pb-6 md:pb-10">
+        <h1 className="text-[clamp(1.75rem,4.2vw,3.25rem)] leading-[1.05] tracking-[-0.025em] max-w-[20ch]">
+          Brand identity, motion, and digital design.
+        </h1>
+        <p className="mt-5 max-w-[52ch] text-[0.95rem] leading-[1.65] text-muted">
+          I&apos;m Leonardo Pham, a designer and filmmaker in Los Angeles. I build identities
+          and the films that carry them. Previously creative director at BREACH Magazine,
+          lead designer at Atheory, and video director at VICE News.
+        </p>
+      </div>
+
+      <nav
+        aria-label="Filter work by discipline"
+        className="px-4 md:px-6 pb-5 flex flex-wrap gap-x-5 gap-y-2 border-b border-hairline"
+      >
+        <Link
+          href="/"
+          aria-current={!filter ? "true" : undefined}
+          className={`meta transition-colors duration-200 ${
+            !filter ? "text-ink" : "text-muted hover:text-ink"
+          }`}
+        >
+          All
+        </Link>
+        {DISCIPLINES.map((d) => (
+          <Link
+            key={d.key}
+            href={`/?c=${d.key}`}
+            aria-current={filter === d.key ? "true" : undefined}
+            className={`meta transition-colors duration-200 ${
+              filter === d.key ? "text-ink" : "text-muted hover:text-ink"
+            }`}
           >
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0 }}
-            >
-              <Navigation
-                activePage={activePage}
-                onPageChange={handlePageChange}
-                onContactClick={() => openContact("Reaching Out")}
-              />
-            </motion.div>
+            {d.label}
+          </Link>
+        ))}
+      </nav>
 
-            <main>
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.15 }}
-              >
-                <HeroGallery activePage={activePage} onContactClick={openContact} onPageChange={handlePageChange} />
-              </motion.div>
-
-              {(activePage === "home" || activePage === "about") && (
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.6 }}
-                >
-                  <CTASection onContactClick={() => openContact("Start a Project")} />
-                </motion.div>
-              )}
-            </main>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-            >
-              <Footer onPageChange={handlePageChange} />
-            </motion.div>
-
-            <ContactModal
-              isOpen={modalOpen}
-              onClose={() => setModalOpen(false)}
-              prefillSubject={modalSubject}
-            />
-          </motion.div>
-        )}
-    </AnimatePresence>
+      <WorkIndex projects={ordered} />
+    </>
   );
 }

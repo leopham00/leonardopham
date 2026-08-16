@@ -38,7 +38,7 @@ export default function About({ onContactClick }: AboutProps) {
             <FadeIn delay={0.2}>
               <div className="max-w-[500px]">
                 <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-                  Creative developer based in Southern California. I help
+                  Design engineer based in Southern California. I help
                   businesses cut through the noise with social media content,
                   high-converting websites, and software that actually works.
                 </p>
