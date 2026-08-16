@@ -565,13 +565,13 @@ export const images: Record<string, Entry> = {
       },
       {
         "src": "/work/google-chrome-organic/03.webp",
-        "w": 1053,
-        "h": 1404
+        "w": 1005,
+        "h": 1461
       },
       {
         "src": "/work/google-chrome-organic/04.webp",
-        "w": 1005,
-        "h": 1461
+        "w": 1053,
+        "h": 1404
       },
       {
         "src": "/work/google-chrome-organic/05.webp",
@@ -602,21 +602,15 @@ export const images: Record<string, Entry> = {
     "videos": [
       {
         "provider": "tiktok",
-        "id": "7518023472681880862",
-        "url": "https://www.tiktok.com/@googlechrome/video/7518023472681880862",
-        "title": "Color-coded tab groups are organized tab groups. Organized tab groups are happy tab groups. \ud83c\udf1f"
+        "id": "7543328742970494239",
+        "url": "https://www.tiktok.com/@googlechrome/video/7543328742970494239",
+        "title": "When you customize your Chrome, you set the vibes, and they\u2019re always on point."
       },
       {
         "provider": "tiktok",
-        "id": "7532129485974441247",
-        "url": "https://www.tiktok.com/@googlechrome/video/7532129485974441247",
-        "title": "Ever wondered, \u201cWhat do you call that thing?\u201d A quick search with Google Lens in Chrome reveals it\u2019s called\u2026 \ud83d\udcad"
-      },
-      {
-        "provider": "tiktok",
-        "id": "7533243110931942687",
-        "url": "https://www.tiktok.com/@googlechrome/video/7533243110931942687",
-        "title": "Three ways Chrome shortcuts help you move faster through your tabs, history, and bookmarks."
+        "id": "7597504995407236382",
+        "url": "https://www.tiktok.com/@googlechrome/video/7597504995407236382",
+        "title": "Food is good in every language, but you gotta know your options. Translate in Chrome helps you order with ease."
       },
       {
         "provider": "tiktok",
@@ -626,15 +620,21 @@ export const images: Record<string, Entry> = {
       },
       {
         "provider": "tiktok",
-        "id": "7543328742970494239",
-        "url": "https://www.tiktok.com/@googlechrome/video/7543328742970494239",
-        "title": "When you customize your Chrome, you set the vibes, and they\u2019re always on point."
-      },
-      {
-        "provider": "tiktok",
         "id": "7585228805795597599",
         "url": "https://www.tiktok.com/@googlechrome/video/7585228805795597599",
         "title": "Sometimes exploring the world means breaking the language barrier. No sweat, you\u2019ve got Translate in Chrome. \ud83c\udf0e"
+      },
+      {
+        "provider": "tiktok",
+        "id": "7533243110931942687",
+        "url": "https://www.tiktok.com/@googlechrome/video/7533243110931942687",
+        "title": "Three ways Chrome shortcuts help you move faster through your tabs, history, and bookmarks."
+      },
+      {
+        "provider": "tiktok",
+        "id": "7518023472681880862",
+        "url": "https://www.tiktok.com/@googlechrome/video/7518023472681880862",
+        "title": "Color-coded tab groups are organized tab groups. Organized tab groups are happy tab groups. \ud83c\udf1f"
       },
       {
         "provider": "tiktok",
@@ -644,15 +644,15 @@ export const images: Record<string, Entry> = {
       },
       {
         "provider": "tiktok",
-        "id": "7589341177061641503",
-        "url": "https://www.tiktok.com/@googlechrome/video/7589341177061641503",
-        "title": "We have to ask one more time to really make sure. Are you absolutely positive that\u2019s the password you want to go with?"
+        "id": "7532129485974441247",
+        "url": "https://www.tiktok.com/@googlechrome/video/7532129485974441247",
+        "title": "Ever wondered, \u201cWhat do you call that thing?\u201d A quick search with Google Lens in Chrome reveals it\u2019s called\u2026 \ud83d\udcad"
       },
       {
         "provider": "tiktok",
-        "id": "7597504995407236382",
-        "url": "https://www.tiktok.com/@googlechrome/video/7597504995407236382",
-        "title": "Food is good in every language, but you gotta know your options. Translate in Chrome helps you order with ease."
+        "id": "7589341177061641503",
+        "url": "https://www.tiktok.com/@googlechrome/video/7589341177061641503",
+        "title": "We have to ask one more time to really make sure. Are you absolutely positive that\u2019s the password you want to go with?"
       }
     ]
   },

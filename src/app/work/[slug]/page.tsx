@@ -229,6 +229,7 @@ export default async function ProjectPage({
         <Gallery
           items={media}
           autoplay={autoplay}
+          cols={layout.cols}
           videoSpan={videoSpan}
           videoAspect={videoAspect}
         />

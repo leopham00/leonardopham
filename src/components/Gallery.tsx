@@ -19,12 +19,16 @@ export default function Gallery({
   autoplay = false,
   videoSpan = "full",
   videoAspect = "16 / 9",
+  cols = 2,
 }: {
   items: Item[];
   autoplay?: boolean;
   videoSpan?: "full" | "half";
   videoAspect?: string;
+  cols?: 2 | 4;
 }) {
+  const grid = cols === 4 ? "md:grid-cols-4" : "md:grid-cols-2";
+  const fullSpan = cols === 4 ? "md:col-span-4" : "md:col-span-2";
   const shots = items.filter((i): i is { kind: "img" } & Img => i.kind === "img");
   const [open, setOpen] = useState<number | null>(null);
   // Which src has finished decoding. The lightbox paints nothing until the
@@ -67,7 +71,7 @@ export default function Gallery({
 
   return (
     <>
-      <div className="px-4 md:px-6 pb-8 md:pb-16 grid gap-4 md:gap-6 md:grid-cols-2 items-start">
+      <div className={`px-4 md:px-6 pb-8 md:pb-16 grid gap-4 md:gap-6 ${grid} items-start`}>
         {items.map((item) => {
           if (item.kind === "video") {
             if (item.provider === "tiktok") {
@@ -88,7 +92,7 @@ export default function Gallery({
             return (
               <div
                 key={`${item.provider}-${item.id}`}
-                className={videoSpan === "full" ? "md:col-span-2" : ""}
+                className={videoSpan === "full" ? fullSpan : ""}
               >
                 <div
                   className="relative w-full bg-[#ebebe8]"
@@ -125,7 +129,7 @@ export default function Gallery({
               type="button"
               onClick={() => show(i, item.src)}
               aria-label="Open image"
-              className={`block w-full cursor-zoom-in ${wide ? "md:col-span-2" : ""}`}
+              className={`block w-full cursor-zoom-in ${wide ? fullSpan : ""}`}
             >
               <Image
                 src={item.src}

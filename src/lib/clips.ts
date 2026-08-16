@@ -35,6 +35,8 @@ export function playsVideo(assets: string): boolean {
  * pairs      images that must sit side by side on the same row.
  * videoAfter place the video after this many images instead of interleaving.
  * hideStills keep the stills for the hover preview but off the project page.
+ * cols       grid columns on the project page. Defaults to 2. Four suits
+ *            sets of vertical clips, which read as a contact sheet at that size.
  *
  * Column span and tile ratio are derived, not configured: a project with a
  * single landscape video gives it the full row, everything else runs one video
@@ -47,20 +49,25 @@ export interface MediaLayout {
   videoAfter?: number;
   /** Keep the stills for the hover preview but leave them off the page. */
   hideStills?: boolean;
+  cols?: 2 | 4;
 }
 
 export const mediaLayout: Record<string, MediaLayout> = {
   // The stills are only there to feed the hover preview. On the page itself
   // the TikTok cards are the work, so the thumbnails would just repeat them.
-  "google-chrome-dyk": { hideStills: true },
-  "google-chrome-organic": { hideStills: true },
+  "google-chrome-dyk": { hideStills: true, cols: 4 },
+  "google-chrome-organic": { hideStills: true, cols: 4 },
   easyherb: {
     order: "mix",
     trailing: ["/work/easyherb/01.webp", "/work/easyherb/05.webp"],
+    cols: 4,
   },
   "sacred-embodiment": {
     trailing: ["/work/sacred-embodiment/01.webp"],
+    cols: 4,
   },
+  vice: { cols: 4 },
+  "coke-cj-henry": { cols: 4 },
   breach: {
     pairs: [["/work/breach/17.webp", "/work/breach/19.webp"]],
   },
