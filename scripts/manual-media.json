@@ -1,0 +1,25 @@
+{
+  "_comment": "Media for projects that did not come from the Readymag scrape. Merged into src/lib/images.generated.ts by scripts/build-media.py. Videos accept youtube, vimeo, or tiktok. For TikTok, id is the numeric id at the end of the post URL.",
+  "google-chrome": {
+    "videos": [
+      {
+        "provider": "tiktok",
+        "id": "7597504995407236382",
+        "url": "https://www.tiktok.com/@googlechrome/video/7597504995407236382",
+        "title": "Food is good in every language, but you gotta know your options. Translate in Chrome helps"
+      },
+      {
+        "provider": "tiktok",
+        "id": "7567012042402499871",
+        "url": "https://www.tiktok.com/@googlechrome/video/7567012042402499871",
+        "title": "Keep your friends close and your bookmarks closer with the handy @bookmarks shortcut. \ud83d\udcda"
+      },
+      {
+        "provider": "tiktok",
+        "id": "7496882871320218910",
+        "url": "https://www.tiktok.com/@googlechrome/video/7496882871320218910",
+        "title": "Sometimes you need the perfect baked feta pasta. Chrome\u2019s got the shortcuts that make find"
+      }
+    ]
+  }
+}

@@ -47,6 +47,9 @@ export interface MediaLayout {
 }
 
 export const mediaLayout: Record<string, MediaLayout> = {
+  // TikTok cards carry their own chrome and cannot autoplay, so they run as a
+  // plain grid rather than being mixed with stills.
+  "google-chrome": { order: "interleave" },
   easyherb: {
     order: "mix",
     trailing: ["/work/easyherb/01.webp", "/work/easyherb/05.webp"],

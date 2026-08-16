@@ -197,6 +197,18 @@ export const projects: Project[] = [
     assets: "sacred-embodiment",
   },
 
+  {
+    slug: "google-chrome",
+    title: "Google Chrome",
+    client: "Google Chrome",
+    agency: "1000heads",
+    discipline: "video",
+    industry: "Technology",
+    role: "Motion Graphics Designer",
+    body: "Short form social work for Chrome, built around the small shortcuts people actually use: translating a menu abroad, pulling up bookmarks, finding a recipe without the scroll. Each cut has to land the feature in the first second and still be worth watching to the end.",
+    assets: "google-chrome",
+  },
+
   // ── Etc: photography and personal work ─────────────────────────────────────────────────────────
   {
     slug: "nts-apparel",

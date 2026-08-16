@@ -70,7 +70,9 @@ export default function Gallery({
         {items.map((item) => {
           if (item.kind === "video") {
             const src =
-              item.provider === "youtube"
+              item.provider === "tiktok"
+                ? `https://www.tiktok.com/embed/v2/${item.id}`
+                : item.provider === "youtube"
                 ? `https://www.youtube-nocookie.com/embed/${item.id}?rel=0&modestbranding=1${
                     autoplay ? `&autoplay=1&mute=1&loop=1&playlist=${item.id}&controls=0` : ""
                   }`
@@ -84,7 +86,9 @@ export default function Gallery({
               >
                 <div
                   className="relative w-full bg-[#ebebe8]"
-                  style={{ aspectRatio: videoAspect }}
+                  style={{
+                    aspectRatio: item.provider === "tiktok" ? "9 / 16" : videoAspect,
+                  }}
                 >
                   <iframe
                     src={src}
